@@ -6,10 +6,10 @@ import { motion } from "framer-motion";
 
 interface HeroProps {
   onExplorePrograms: () => void;
-  onJoinCommunity: () => void;
+  onJoinCommunity?: () => void;
 }
 
-export default function Hero({ onExplorePrograms, onJoinCommunity }: HeroProps) {
+export default function Hero({ onExplorePrograms }: HeroProps) {
   // Animated statistics counter
   const [statsCount, setStatsCount] = useState({ women: 0, percent: 0, programs: 0 });
 
@@ -31,16 +31,16 @@ export default function Hero({ onExplorePrograms, onJoinCommunity }: HeroProps) 
   }, []);
 
   return (
-    <section className="pt-6 sm:pt-8 md:pt-10 pb-10 md:pb-14 bg-white overflow-hidden">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+    <section className="relative bg-white overflow-hidden">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-center">
           
-          {/* Left Column: Editorial Headline & Copy */}
+          {/* Left Column: Editorial Headline, Copy, CTAs, Statistics */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center"
+            className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center pt-24 sm:pt-28 lg:pt-32 pb-8 sm:pb-12 lg:pb-16"
           >
             {/* Eyebrow */}
             <div className="flex items-center space-x-2 text-[11px] sm:text-[11.5px] font-semibold tracking-[0.22em] text-[#554F4B] uppercase mb-4 sm:mb-5">
@@ -52,7 +52,7 @@ export default function Hero({ onExplorePrograms, onJoinCommunity }: HeroProps) 
             </div>
 
             {/* Headline */}
-            <h1 className="font-serif text-[42px] sm:text-[50px] lg:text-[56px] xl:text-[60px] font-normal leading-[1.08] text-[#1E1C1A] tracking-[-0.015em] mb-4 sm:mb-5">
+            <h1 className="font-serif text-[38px] sm:text-[46px] md:text-[52px] lg:text-[56px] xl:text-[60px] font-normal leading-[1.08] text-[#1E1C1A] tracking-[-0.015em] mb-4 sm:mb-5">
               Your Next
               <br />
               Chapter Starts Here
@@ -60,7 +60,7 @@ export default function Hero({ onExplorePrograms, onJoinCommunity }: HeroProps) 
             </h1>
 
             {/* Supporting paragraph */}
-            <p className="text-[15px] sm:text-[16px] leading-[1.65] text-[#554F4B] font-normal max-w-[460px] mb-8 sm:mb-10">
+            <p className="text-[15px] sm:text-[16px] leading-[1.65] text-[#554F4B] font-normal w-full max-w-xl lg:max-w-[480px] mb-8 sm:mb-10">
               Practical programs, a supportive community and real opportunities
               to help you restart, grow and lead — on your terms.
             </p>
@@ -74,19 +74,21 @@ export default function Hero({ onExplorePrograms, onJoinCommunity }: HeroProps) 
                 Explore Programs
               </button>
 
-              <button
-                onClick={onJoinCommunity}
-                className="border border-[#B44A63] hover:bg-[#B44A63]/5 text-[#1E1C1A] hover:text-[#B44A63] text-[14px] font-medium tracking-wide px-6 py-3.5 rounded-[4px] transition-all duration-200 active:scale-[0.98] cursor-pointer"
+              <a
+                href="https://chat.whatsapp.com/BfPFwGkAPTNH72j2Bbnx2J?s=cl&p=i&mlu=4&ilr=4"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-[#B44A63] hover:bg-[#B44A63]/5 text-[#1E1C1A] hover:text-[#B44A63] text-[14px] font-medium tracking-wide px-6 py-3.5 rounded-[4px] transition-all duration-200 active:scale-[0.98] cursor-pointer inline-flex items-center justify-center"
               >
                 Join the Community
-              </button>
+              </a>
             </div>
 
-            {/* Statistics Row (no top horizontal border, matching reference) */}
-            <div className="flex items-start gap-5 sm:gap-7 max-w-[460px]">
+            {/* Statistics Row */}
+            <div className="flex flex-wrap sm:flex-nowrap items-start gap-5 sm:gap-7 w-full max-w-xl">
               {/* Stat 1 */}
               <div className="flex flex-col">
-                <span className="font-serif text-[30px] sm:text-[34px] font-normal text-[#1E1C1A] leading-none mb-1">
+                <span className="font-serif text-[28px] sm:text-[32px] lg:text-[34px] font-normal text-[#1E1C1A] leading-none mb-1">
                   {statsCount.women}+
                 </span>
                 <span className="text-[11.5px] leading-snug text-[#6E6762] font-normal">
@@ -94,11 +96,11 @@ export default function Hero({ onExplorePrograms, onJoinCommunity }: HeroProps) 
                 </span>
               </div>
 
-              <div className="w-[1px] h-9 bg-[#E8E2DC] self-center shrink-0" />
+              <div className="hidden sm:block w-[1px] h-9 bg-[#E8E2DC] self-center shrink-0" />
 
               {/* Stat 2 */}
               <div className="flex flex-col">
-                <span className="font-serif text-[30px] sm:text-[34px] font-normal text-[#1E1C1A] leading-none mb-1">
+                <span className="font-serif text-[28px] sm:text-[32px] lg:text-[34px] font-normal text-[#1E1C1A] leading-none mb-1">
                   {statsCount.percent}%
                 </span>
                 <span className="text-[11.5px] leading-snug text-[#6E6762] font-normal">
@@ -106,35 +108,35 @@ export default function Hero({ onExplorePrograms, onJoinCommunity }: HeroProps) 
                 </span>
               </div>
 
-              <div className="w-[1px] h-9 bg-[#E8E2DC] self-center shrink-0" />
+              <div className="hidden sm:block w-[1px] h-9 bg-[#E8E2DC] self-center shrink-0" />
 
               {/* Stat 3 */}
               <div className="flex flex-col">
-                <span className="font-serif text-[30px] sm:text-[34px] font-normal text-[#1E1C1A] leading-none mb-1">
+                <span className="font-serif text-[28px] sm:text-[32px] lg:text-[34px] font-normal text-[#1E1C1A] leading-none mb-1">
                   {statsCount.programs}
                 </span>
                 <span className="text-[11.5px] leading-snug text-[#6E6762] font-normal">
-                  Signature Programs
+                  Flagship Programs
                 </span>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Column: Hero Visual with Lifestyle Image matching reference */}
+          {/* Right Column: Hero Visual - Stays coupled with content, stacks on zoom / narrow */}
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
-            className="lg:col-span-6 xl:col-span-6 relative flex justify-center lg:justify-end items-end"
+            className="lg:col-span-6 xl:col-span-6 relative flex justify-center lg:justify-end items-end w-full lg:-mt-20 xl:-mt-24 pb-8 lg:pb-0"
           >
-            <div className="relative w-full max-w-[500px] xl:max-w-[520px] aspect-[415/366]">
+            <div className="relative w-full max-w-[540px] lg:max-w-none aspect-[900/860] lg:min-h-[520px] xl:min-h-[580px]">
               <Image
-                src="/images/hero-portrait.png"
-                alt="Professional woman reflecting with coffee and book stack"
+                src="/images/hero-portrait.webp"
+                alt="Ambitious woman reflecting with coffee and inspiring books"
                 fill
                 priority
-                sizes="(max-width: 768px) 100vw, 520px"
-                className="object-contain lg:object-cover object-bottom"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain lg:object-cover object-bottom lg:object-top"
               />
             </div>
           </motion.div>

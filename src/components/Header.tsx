@@ -5,10 +5,10 @@ import Logo from "./Logo";
 import { Menu, X } from "lucide-react";
 
 interface HeaderProps {
-  onOpenJoinModal: () => void;
+  onOpenJoinModal?: () => void;
 }
 
-export default function Header({ onOpenJoinModal }: HeaderProps) {
+export default function Header({ onOpenJoinModal }: HeaderProps = {}) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("Home");
@@ -34,13 +34,13 @@ export default function Header({ onOpenJoinModal }: HeaderProps) {
   return (
     <>
       <header
-        className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? "bg-white/95 backdrop-blur-md border-b border-[#EBE4DC] py-2.5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.04)]"
-            : "bg-white border-b border-[#F0EBE5] py-3.5"
+            : "bg-transparent py-4 sm:py-5 border-b border-transparent"
         }`}
       >
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Left: Brand Logo */}
             <a href="#" className="flex-shrink-0" aria-label="HerAmbition Home">
@@ -62,7 +62,7 @@ export default function Header({ onOpenJoinModal }: HeaderProps) {
                   >
                     {item.name}
                     {isActive && (
-                      <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#181615] rounded-full" />
+                      <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#B44A63] rounded-full" />
                     )}
                   </a>
                 );
@@ -71,22 +71,26 @@ export default function Header({ onOpenJoinModal }: HeaderProps) {
 
             {/* Right: Join CTA button */}
             <div className="hidden lg:flex items-center">
-              <button
-                onClick={onOpenJoinModal}
-                className="bg-[#B44A63] hover:bg-[#9E3D54] text-white text-[13px] font-medium tracking-wide px-5 py-2.5 rounded-[4px] shadow-xs transition-all duration-200 active:scale-[0.98] hover:shadow-md cursor-pointer"
+              <a
+                href="https://chat.whatsapp.com/BfPFwGkAPTNH72j2Bbnx2J?s=cl&p=i&mlu=4&ilr=4"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#B44A63] hover:bg-[#9E3D54] text-white text-[13px] font-medium tracking-wide px-5 py-2.5 rounded-[4px] shadow-xs transition-all duration-200 active:scale-[0.98] hover:shadow-md cursor-pointer inline-flex items-center"
               >
                 Join the Community
-              </button>
+              </a>
             </div>
 
             {/* Mobile Hamburger Toggle */}
             <div className="flex lg:hidden items-center space-x-3">
-              <button
-                onClick={onOpenJoinModal}
+              <a
+                href="https://chat.whatsapp.com/BfPFwGkAPTNH72j2Bbnx2J?s=cl&p=i&mlu=4&ilr=4"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-[#B44A63] text-white text-[12px] font-medium px-3.5 py-1.5 rounded-[4px] sm:inline-block"
               >
                 Join
-              </button>
+              </a>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="p-2 text-[#221F1D] hover:text-[#B44A63] focus:outline-none"
@@ -139,15 +143,15 @@ export default function Header({ onOpenJoinModal }: HeaderProps) {
             </div>
 
             <div className="pt-6 border-t border-[#EAE4DC] space-y-4">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenJoinModal();
-                }}
-                className="w-full bg-[#B44A63] hover:bg-[#9E3D54] text-white py-3 rounded-[4px] font-medium text-sm text-center shadow-xs"
+              <a
+                href="https://chat.whatsapp.com/BfPFwGkAPTNH72j2Bbnx2J?s=cl&p=i&mlu=4&ilr=4"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block w-full bg-[#B44A63] hover:bg-[#9E3D54] text-white py-3 rounded-[4px] font-medium text-sm text-center shadow-xs cursor-pointer"
               >
                 Join the Community
-              </button>
+              </a>
               <p className="text-center text-xs text-[#7A746E]">
                 Lead with Grace & Impact
               </p>

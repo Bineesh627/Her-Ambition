@@ -13,7 +13,7 @@ const programsData: Program[] = [
       "Find clarity, rebuild confidence and create a career plan that works for you.",
     duration: "4 - 6 Weeks",
     audience: "For women restarting or realigning their careers",
-    image: "/images/program-becoming.png",
+    image: "/images/program-becoming.webp",
     fullOverview:
       "A transformative career accelerator tailored for women returning to the workforce or seeking a pivotal career pivot. Includes 1-on-1 strategy sessions, peer cohorts, and dedicated industry mentorship.",
     curriculum: [
@@ -26,37 +26,41 @@ const programsData: Program[] = [
   {
     id: "her-influence",
     title: "HerInfluence",
-    category: "LEADERSHIP DEVELOPMENT",
+    category: "6-Week Leadership Development Program",
     description:
       "Strengthen your leadership skills, visibility and impact in the workplace.",
     duration: "4 - 6 Weeks",
     audience: "For mid to senior women professionals",
-    image: "/images/program-influence.png",
+    image: "/images/program-influence.webp",
     fullOverview:
-      "Designed specifically for high-potential women stepping into team lead, director, and VP roles. Master stakeholder management, board communications, and authentic influence.",
+      "HerInfluence helps women strengthen their leadership presence, influence and visibility within their organisation, preparing them for greater responsibility and career growth.",
     curriculum: [
-      "Week 1: Authentic Leadership Style & Personal Brand",
-      "Week 2: Strategic Influence & Cross-Functional Alignment",
-      "Week 3: High-Stakes Decision Making & Conflict Resolution",
-      "Week 4-6: Executive Presence, Sponsorship & Board Navigation",
+      "Work Profile Assessment",
+      "Assessment Debrief & Personal Insights",
+      "Leadership Identity & Personal Brand",
+      "Strategic Influence & Stakeholder Management",
+      "Executive Presence, Visibility & Communication",
+      "90-Day Leadership Growth & Action Plan",
     ],
   },
   {
     id: "the-foundher",
     title: "The FoundHer",
-    category: "ENTREPRENEURSHIP & BUSINESS GROWTH",
+    category: "From Vision to Visibility",
     description:
       "Turn your ideas into sustainable ventures with the right tools, network and guidance.",
     duration: "4 - 6 Weeks",
     audience: "For aspiring and early-stage women founders",
-    image: "/images/program-foundher.png",
+    image: "/images/program-foundher.webp",
     fullOverview:
-      "From zero to validated enterprise. We provide women founders with the tactical roadmap, investor network, go-to-market strategies, and capital-raising playbooks.",
+      "A practical growth program designed to help women founders build clarity, strengthen their brand and execute their next stage of growth.",
     curriculum: [
-      "Week 1: Value Proposition & Customer Problem Validation",
-      "Week 2: Unit Economics, Business Model & Lean Launch",
-      "Week 3: Go-To-Market, Organic & Paid Acquisition",
-      "Week 4-6: Pitch Deck Architecture & Investor Outreach",
+      "Founder Assessment",
+      "Business Roadmap & Execution Plan",
+      "Website / Landing Page Development",
+      "Social Media Campaign Support",
+      "Workshop & Event Calendar",
+      "Networking & Business Growth Opportunities",
     ],
   },
 ];
@@ -71,8 +75,8 @@ export default function ProgramsSection({
   onViewAllPrograms,
 }: ProgramsSectionProps) {
   return (
-    <section id="programs" className="py-20 md:py-28 bg-white">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="programs" className="py-16 md:py-24 bg-white">
+      <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16">

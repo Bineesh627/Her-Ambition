@@ -7,7 +7,7 @@ import { testimonialsData } from "./Testimonials";
 interface StoriesModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onJoin: () => void;
+  onJoin?: () => void;
 }
 
 export default function StoriesModal({
@@ -103,15 +103,15 @@ export default function StoriesModal({
           <span className="text-xs text-[#7A736E]">
             Ready to write your next chapter?
           </span>
-          <button
-            onClick={() => {
-              onClose();
-              onJoin();
-            }}
-            className="bg-[#B44A63] hover:bg-[#9E3D54] text-white text-xs font-medium uppercase tracking-wider px-5 py-2.5 rounded-[4px]"
+          <a
+            href="https://chat.whatsapp.com/BfPFwGkAPTNH72j2Bbnx2J?s=cl&p=i&mlu=4&ilr=4"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onClose}
+            className="bg-[#B44A63] hover:bg-[#9E3D54] text-white text-xs font-medium uppercase tracking-wider px-5 py-2.5 rounded-[4px] inline-flex items-center"
           >
             Join HerAmbition
-          </button>
+          </a>
         </div>
 
       </div>

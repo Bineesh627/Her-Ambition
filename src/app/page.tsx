@@ -3,26 +3,23 @@
 import React, { useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import AboutSection from "@/components/AboutSection";
 import ProgramsSection, { Program, programsData } from "@/components/ProgramsSection";
 import CareerReadiness from "@/components/CareerReadiness";
 import MembershipSection from "@/components/MembershipSection";
 import Testimonials from "@/components/Testimonials";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
-import JoinModal from "@/components/JoinModal";
 import ProgramModal from "@/components/ProgramModal";
 import StoriesModal from "@/components/StoriesModal";
+import FounderModal from "@/components/FounderModal";
+import CorporatePartnerModal from "@/components/CorporatePartnerModal";
 
 export default function Home() {
-  const [joinModalOpen, setJoinModalOpen] = useState(false);
-  const [joinModalType, setJoinModalType] = useState<"community" | "membership" | "career">("community");
   const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
   const [storiesModalOpen, setStoriesModalOpen] = useState(false);
-
-  const handleOpenJoin = (type: "community" | "membership" | "career" = "community") => {
-    setJoinModalType(type);
-    setJoinModalOpen(true);
-  };
+  const [founderModalOpen, setFounderModalOpen] = useState(false);
+  const [corporateModalOpen, setCorporateModalOpen] = useState(false);
 
   const handleExplorePrograms = () => {
     const el = document.getElementById("programs");
@@ -34,12 +31,15 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col bg-white text-[#1E1C1A]">
       {/* 1. Header & Navigation */}
-      <Header onOpenJoinModal={() => handleOpenJoin("community")} />
+      <Header />
 
       {/* 2. Hero Section */}
-      <Hero
-        onExplorePrograms={handleExplorePrograms}
-        onJoinCommunity={() => handleOpenJoin("community")}
+      <Hero onExplorePrograms={handleExplorePrograms} />
+
+      {/* 2.5. About Section (Meet the Founder & Corporate Solutions) */}
+      <AboutSection
+        onOpenFounderJourney={() => setFounderModalOpen(true)}
+        onOpenCorporatePartner={() => setCorporateModalOpen(true)}
       />
 
       {/* 3. Programs Section */}
@@ -49,14 +49,10 @@ export default function Home() {
       />
 
       {/* 4. Career Readiness Section */}
-      <CareerReadiness
-        onExplore={() => handleOpenJoin("career")}
-      />
+      <CareerReadiness />
 
       {/* 5. Membership Section */}
-      <MembershipSection
-        onJoinMembership={() => handleOpenJoin("membership")}
-      />
+      <MembershipSection />
 
       {/* 6. Testimonials Section */}
       <Testimonials
@@ -64,30 +60,33 @@ export default function Home() {
       />
 
       {/* 7. Final Call to Action */}
-      <FinalCTA
-        onJoin={() => handleOpenJoin("community")}
-      />
+      <FinalCTA />
 
       {/* 8. Footer */}
       <Footer />
 
-      {/* Interactive Overlays */}
-      <JoinModal
-        isOpen={joinModalOpen}
-        onClose={() => setJoinModalOpen(false)}
-        initialType={joinModalType}
-      />
-
+      {/* Program Details Modal */}
       <ProgramModal
         program={selectedProgram}
         onClose={() => setSelectedProgram(null)}
-        onRegister={() => handleOpenJoin("career")}
       />
 
+      {/* Alumnae Stories Modal */}
       <StoriesModal
         isOpen={storiesModalOpen}
         onClose={() => setStoriesModalOpen(false)}
-        onJoin={() => handleOpenJoin("community")}
+      />
+
+      {/* Founder Journey Modal */}
+      <FounderModal
+        isOpen={founderModalOpen}
+        onClose={() => setFounderModalOpen(false)}
+      />
+
+      {/* Corporate Partner Modal */}
+      <CorporatePartnerModal
+        isOpen={corporateModalOpen}
+        onClose={() => setCorporateModalOpen(false)}
       />
     </main>
   );

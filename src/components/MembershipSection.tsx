@@ -5,37 +5,37 @@ import Image from "next/image";
 import { ArrowRight, Users } from "lucide-react";
 
 interface MembershipSectionProps {
-  onJoinMembership: () => void;
+  onJoinMembership?: () => void;
 }
 
 export default function MembershipSection({ onJoinMembership }: MembershipSectionProps) {
   return (
-    <section id="membership" className="py-20 md:py-28 bg-white overflow-hidden">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+    <section id="membership" className="py-14 sm:py-16 md:py-20 lg:py-24 bg-white overflow-hidden">
+      <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
           
           {/* Left Column: Meeting Photography */}
-          <div className="lg:col-span-5 xl:col-span-5">
-            <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden border border-[#EAE3DC] bg-[#FAF8F5] shadow-xs">
+          <div className="w-full lg:col-span-5 xl:col-span-5 flex justify-center">
+            <div className="relative w-full max-w-[540px] lg:max-w-none aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] rounded-lg overflow-hidden bg-[#FAF8F5]">
               <Image
-                src="/images/membership-meeting.png"
-                alt="Women professionals collaborating and networking in HerAmbition community"
+                src="/images/membership-meeting.webp"
+                alt="Diverse group of ambitious professional women networking and discussing in HerAmbition community"
                 fill
-                sizes="(max-width: 768px) 100vw, 500px"
-                className="object-cover object-center transform transition-transform duration-500 hover:scale-[1.02]"
+                sizes="(max-width: 1024px) 100vw, 500px"
+                className="object-cover object-left sm:object-center"
               />
             </div>
           </div>
 
           {/* Right Column: Copy + Circular Badge */}
-          <div className="lg:col-span-7 xl:col-span-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 lg:gap-10">
+          <div className="w-full lg:col-span-7 xl:col-span-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 lg:gap-10">
             
-            <div className="flex-1 max-w-lg">
+            <div className="flex-1 w-full max-w-xl">
               <p className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] text-[#6E6762] uppercase mb-3">
                 HERAMBITION MEMBERSHIP
               </p>
 
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-[44px] font-normal leading-[1.15] text-[#1E1C1A] tracking-tight mb-4">
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-[40px] xl:text-[44px] font-normal leading-[1.15] text-[#1E1C1A] tracking-tight mb-4">
                 Belong. Learn. Grow Together.
               </h2>
 
@@ -46,20 +46,22 @@ export default function MembershipSection({ onJoinMembership }: MembershipSectio
               </p>
 
               <div>
-                <button
-                  onClick={onJoinMembership}
+                <a
+                  href="https://chat.whatsapp.com/BfPFwGkAPTNH72j2Bbnx2J?s=cl&p=i&mlu=4&ilr=4"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center border border-[#B44A63] hover:bg-[#B44A63] text-[#B44A63] hover:text-white text-[13.5px] sm:text-[14px] font-medium tracking-wide px-7 py-3 rounded-[4px] transition-all duration-200 active:scale-[0.98] cursor-pointer group"
                 >
                   <span>Become a Member</span>
                   <span className="ml-2 transform transition-transform duration-200 group-hover:translate-x-1">
                     &rarr;
                   </span>
-                </button>
+                </a>
               </div>
             </div>
 
             {/* Circular Decorative Badge matching reference */}
-            <div className="flex-shrink-0 flex items-center justify-center self-center md:self-auto">
+            <div className="flex-shrink-0 self-center sm:self-auto">
               <div className="w-36 h-36 sm:w-40 sm:h-40 rounded-full bg-[#FCEEEA] p-4 flex flex-col items-center justify-center text-center shadow-2xs transition-transform duration-300 hover:scale-105">
                 <Users size={24} className="text-[#B44A63] mb-1.5" strokeWidth={1.5} />
                 <p className="font-script text-[19px] sm:text-[21px] leading-[1.15] text-[#3D3735] select-none">

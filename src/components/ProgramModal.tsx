@@ -8,13 +8,12 @@ import { Program } from "./ProgramCard";
 interface ProgramModalProps {
   program: Program | null;
   onClose: () => void;
-  onRegister: () => void;
+  onRegister?: () => void;
 }
 
 export default function ProgramModal({
   program,
   onClose,
-  onRegister,
 }: ProgramModalProps) {
   if (!program) return null;
 
@@ -105,16 +104,16 @@ export default function ProgramModal({
             <div className="text-xs text-[#7A746E]">
               Next cohort begins next month. Limited to 25 seats per track.
             </div>
-            <button
-              onClick={() => {
-                onClose();
-                onRegister();
-              }}
+            <a
+              href="https://chat.whatsapp.com/BfPFwGkAPTNH72j2Bbnx2J?s=cl&p=i&mlu=4&ilr=4"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={onClose}
               className="w-full sm:w-auto inline-flex items-center justify-center bg-[#B44A63] hover:bg-[#9E3D54] text-white text-[13.5px] font-medium tracking-wide px-7 py-2.5 rounded-[4px] shadow-xs transition-colors cursor-pointer"
             >
-              <span>Apply for this Track</span>
+              <span>Apply via WhatsApp</span>
               <ArrowRight size={15} className="ml-1.5" />
-            </button>
+            </a>
           </div>
 
         </div>
