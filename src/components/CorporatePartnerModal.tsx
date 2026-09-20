@@ -13,13 +13,17 @@ const solutionsList = [
   "Women Leadership Development",
   "Workplace Wellbeing & Mental Health",
   "HR Advisory & Training",
+  "Maternity Coach and Training",
+  "All the above",
 ];
 
 export default function CorporatePartnerModal({
   isOpen,
   onClose,
 }: CorporatePartnerModalProps) {
-  const [selectedSolution, setSelectedSolution] = useState(solutionsList[0]);
+  const [selectedSolutions, setSelectedSolutions] = useState<string[]>([
+    "Returnship Programs",
+  ]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,6 +31,31 @@ export default function CorporatePartnerModal({
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+
+  const toggleSolution = (sol: string) => {
+    if (sol === "All the above") {
+      if (selectedSolutions.includes("All the above")) {
+        setSelectedSolutions(["Returnship Programs"]);
+      } else {
+        setSelectedSolutions(["All the above"]);
+      }
+      return;
+    }
+
+    let updated = selectedSolutions.filter((s) => s !== "All the above");
+    if (updated.includes(sol)) {
+      if (updated.length > 1) {
+        updated = updated.filter((s) => s !== sol);
+      }
+    } else {
+      updated.push(sol);
+      const individual = solutionsList.filter((s) => s !== "All the above");
+      if (updated.length === individual.length) {
+        updated = ["All the above"];
+      }
+    }
+    setSelectedSolutions(updated);
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -119,24 +148,40 @@ export default function CorporatePartnerModal({
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               {/* Solution Selection */}
               <div>
-                <label className="block text-[12.5px] font-semibold text-[#1E1C1A] uppercase tracking-wider mb-2">
-                  Select Corporate Solution
-                </label>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-[12.5px] font-semibold text-[#1E1C1A] uppercase tracking-wider">
+                    Select Corporate Solution
+                  </label>
+                  <span className="text-[11px] text-[#8C847E]">
+                    (Select one or more)
+                  </span>
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {solutionsList.map((sol) => (
-                    <button
-                      key={sol}
-                      type="button"
-                      onClick={() => setSelectedSolution(sol)}
-                      className={`text-left text-[12.5px] px-3.5 py-2.5 rounded-lg border transition-all ${
-                        selectedSolution === sol
-                          ? "bg-[#FAF5EE] border-[#BF8237] text-[#BF8237] font-semibold shadow-xs"
-                          : "bg-white border-[#E8E2DC] text-[#4A4541] hover:border-[#BF8237]/50"
-                      }`}
-                    >
-                      {sol}
-                    </button>
-                  ))}
+                  {solutionsList.map((sol) => {
+                    const isSelected =
+                      selectedSolutions.includes(sol) ||
+                      (selectedSolutions.includes("All the above") && sol === "All the above");
+
+                    return (
+                      <button
+                        key={sol}
+                        type="button"
+                        onClick={() => toggleSolution(sol)}
+                        className={`flex items-center justify-between text-left text-[12.5px] px-3.5 py-2.5 rounded-lg border transition-all cursor-pointer ${
+                          isSelected
+                            ? "bg-[#FAF5EE] border-[#BF8237] text-[#BF8237] font-semibold shadow-xs"
+                            : "bg-white border-[#E8E2DC] text-[#4A4541] hover:border-[#BF8237]/50"
+                        }`}
+                      >
+                        <span className="truncate pr-2">{sol}</span>
+                        {isSelected && (
+                          <span className="w-4 h-4 rounded-full bg-[#BF8237] text-white flex items-center justify-center text-[10px] shrink-0">
+                            ✓
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 

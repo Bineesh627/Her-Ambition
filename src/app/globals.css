@@ -126,15 +126,17 @@ section {
    IMAGES / MEDIA
    ========================================================= */
 
-img,
-video,
-canvas,
-svg {
-  max-width: 100%;
-}
+@layer base {
+  img,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
+  }
 
-img {
-  height: auto;
+  img {
+    height: auto;
+  }
 }
 
 /*

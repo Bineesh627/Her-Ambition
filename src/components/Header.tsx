@@ -34,11 +34,10 @@ export default function Header({ onOpenJoinModal }: HeaderProps = {}) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-white/95 backdrop-blur-md border-b border-[#EBE4DC] py-2.5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.04)]"
-            : "bg-transparent py-4 sm:py-5 border-b border-transparent"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+            ? "bg-white/95 backdrop-blur-md border-b border-[#EBE4DC] py-2 sm:py-2.5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.04)]"
+            : "bg-transparent py-2.5 sm:py-4 lg:py-5 border-b border-transparent"
+          }`}
       >
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -56,9 +55,8 @@ export default function Header({ onOpenJoinModal }: HeaderProps = {}) {
                     key={item.name}
                     href={item.href}
                     onClick={() => setActiveNav(item.name)}
-                    className={`relative py-1 text-[#221F1D] transition-colors duration-200 hover:text-[#B44A63] ${
-                      isActive ? "font-semibold text-[#181615]" : "text-[#4A4541]"
-                    }`}
+                    className={`relative py-1 text-[#221F1D] transition-colors duration-200 hover:text-[#B44A63] ${isActive ? "font-semibold text-[#181615]" : "text-[#4A4541]"
+                      }`}
                   >
                     {item.name}
                     {isActive && (
@@ -130,11 +128,10 @@ export default function Header({ onOpenJoinModal }: HeaderProps = {}) {
                       setActiveNav(item.name);
                       setMobileMenuOpen(false);
                     }}
-                    className={`text-base font-medium transition-colors py-1 ${
-                      activeNav === item.name
+                    className={`text-base font-medium transition-colors py-1 ${activeNav === item.name
                         ? "text-[#B44A63] font-semibold"
                         : "text-[#2B2725] hover:text-[#B44A63]"
-                    }`}
+                      }`}
                   >
                     {item.name}
                   </a>

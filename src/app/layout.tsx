@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "women leadership",
     "career restart",
     "women in business",
-    "executive coaching for women",
+    "executive mentorship for women",
     "women founders accelerator",
     "HerAmbition community",
     "career readiness for women",
@@ -101,7 +101,7 @@ export default function RootLayout({
           "@type": "Person",
           name: "Tabassum Sait",
           jobTitle: "Founder & Chief Mentor",
-          description: "HR Leader, Coach, Mentor and Builder of Communities with 15+ years experience across Swiss Re, NHS, and startups.",
+          description: "HR Practitioner, CIPD Certified, Mentor and Builder of Communities with 15+ years experience across Swiss Re, NHS, and startups.",
         },
         sameAs: [
           "https://chat.whatsapp.com/BfPFwGkAPTNH72j2Bbnx2J?s=cl&p=i&mlu=4&ilr=4",

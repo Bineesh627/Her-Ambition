@@ -46,7 +46,7 @@
 
 ## Career Readiness Program
 - **Resume & LinkedIn Makeover**: Modern ATS-optimized resume formatting and thought-leadership LinkedIn profiles.
-- **Interview Readiness**: Behavioral, competency, and case interview coaching with industry hiring leaders.
+- **Interview Readiness**: Behavioral, competency, and case interview preparation with industry hiring leaders.
 - **Career Clarity**: Structured diagnostic frameworks to map career options to personal lifestyle and compensation targets.
 - **Ongoing Support**: Continuous post-program check-ins, peer mastermind circles, and recruiter warm introductions.
 
@@ -60,4 +60,4 @@
 3. **Are the cohort programs online or in-person?**
    Programs feature live interactive virtual cohort sessions combined with regional in-person networking chapters in Bangalore and major tech hubs.
 4. **Who are the mentors?**
-   Mentors are senior women executives, startup founders, talent leaders, and executive coaches from Fortune 500 companies and high-growth startups.
+   Mentors are senior women executives, startup founders, talent leaders, and executive mentors from Fortune 500 companies and high-growth startups.

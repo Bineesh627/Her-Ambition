@@ -29,7 +29,7 @@ export default function StoriesModal({
     },
     {
       quote:
-        "Building a startup as a solo female founder can be lonely. The FoundHer gave me the strategic grit, founder network, and initial angel pitch coaching I needed.",
+        "Building a startup as a solo female founder can be lonely. The FoundHer gave me the strategic grit, founder network, and initial angel pitch guidance I needed.",
       author: "Radhika M.",
       role: "Founder, BloomWellness",
       extendedStory:

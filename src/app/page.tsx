@@ -8,6 +8,7 @@ import ProgramsSection, { Program, programsData } from "@/components/ProgramsSec
 import CareerReadiness from "@/components/CareerReadiness";
 import MembershipSection from "@/components/MembershipSection";
 import Testimonials from "@/components/Testimonials";
+import ContactSection from "@/components/ContactSection";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import ProgramModal from "@/components/ProgramModal";
@@ -58,6 +59,9 @@ export default function Home() {
       <Testimonials
         onSeeMoreStories={() => setStoriesModalOpen(true)}
       />
+
+      {/* 6.5. Contact Section */}
+      <ContactSection />
 
       {/* 7. Final Call to Action */}
       <FinalCTA />

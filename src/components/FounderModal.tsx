@@ -77,7 +77,7 @@ export default function FounderModal({ isOpen, onClose }: FounderModalProps) {
                 Tabassum Sait
               </h2>
               <p className="text-[14px] font-semibold text-[#BF8237]">
-                HR Leader · Coach · Mentor · Builder of Communities
+                HR Practitioner · CIPD Certified · Mentor · Builder of Communities
               </p>
               <p className="text-[12.5px] text-[#6E6762] mt-0.5">
                 15+ years experience · Ex-Swiss Re &amp; NHS · Startup CHRO
@@ -96,7 +96,7 @@ export default function FounderModal({ isOpen, onClose }: FounderModalProps) {
               The Journey
             </h3>
             <p className="text-[14.5px] leading-relaxed text-[#554F4B]">
-              Tabassum Sait is an accomplished Senior HR Leader, Executive Coach, and Founder of
+              Tabassum Sait is an accomplished Senior HR Practitioner, CIPD Certified professional, and Founder of
               HerAmbition. With over 15 years of multifaceted leadership experience across global
               institutions like <strong>Swiss Re</strong> and the <strong>NHS (UK)</strong>, as well as serving
               as Chief Human Resources Officer (CHRO) in high-growth startup ecosystems, Tabassum has
@@ -135,7 +135,7 @@ export default function FounderModal({ isOpen, onClose }: FounderModalProps) {
               <div className="flex items-start gap-2.5 p-3 rounded-lg bg-[#FAF8F5] border border-[#EAE3DB]">
                 <Award className="w-4 h-4 text-[#BF8237] shrink-0 mt-0.5" />
                 <div>
-                  <strong className="block text-[#1E1C1A] font-medium">Executive Coaching</strong>
+                  <strong className="block text-[#1E1C1A] font-medium">Executive Leadership &amp; Advisory</strong>
                   <span className="text-[#6E6762] text-[12.5px]">Mastering workplace influence, executive presence, and strategic positioning.</span>
                 </div>
               </div>
