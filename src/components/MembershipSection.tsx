@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import membershipMeetingImg from "../../public/images/membership-meeting.webp";
 import { ArrowRight, Users } from "lucide-react";
 
 interface MembershipSectionProps {
@@ -17,13 +17,12 @@ export default function MembershipSection({ onJoinMembership }: MembershipSectio
           
           {/* Left Column: Meeting Photography */}
           <div className="w-full lg:col-span-5 xl:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-[540px] lg:max-w-none aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] rounded-lg overflow-hidden bg-[#FAF8F5]">
-              <Image
-                src="/images/membership-meeting.webp"
+            <div className="relative w-full max-w-[540px] lg:max-w-none aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden shadow-[0_10px_30px_-10px_rgba(0,0,0,0.08)] border border-[#ECE5DD] bg-[#FAF8F5]">
+              <img
+                src={typeof membershipMeetingImg === "string" ? membershipMeetingImg : membershipMeetingImg.src}
                 alt="Diverse group of ambitious professional women networking and discussing in HerAmbition community"
-                fill
-                sizes="(max-width: 1024px) 100vw, 500px"
-                className="object-cover object-left sm:object-center"
+                className="w-full h-full object-cover object-center"
+                loading="lazy"
               />
             </div>
           </div>

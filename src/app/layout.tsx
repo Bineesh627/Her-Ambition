@@ -107,7 +107,6 @@ export default function RootLayout({
           "https://chat.whatsapp.com/BfPFwGkAPTNH72j2Bbnx2J?s=cl&p=i&mlu=4&ilr=4",
           "https://www.instagram.com/herambition.community?stkn=MTZsenJzcTF5Z2NxMQ%3D%3D&utm_source=qr",
           "https://www.linkedin.com",
-          "https://www.youtube.com",
         ],
         contactPoint: {
           "@type": "ContactPoint",

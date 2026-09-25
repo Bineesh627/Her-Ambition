@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import heroPortraitImg from "../../public/images/hero-portrait.webp";
 import { motion } from "framer-motion";
 
 interface HeroProps {
@@ -113,21 +113,18 @@ export default function Hero({ onExplorePrograms }: HeroProps) {
             </div>
           </motion.div>
 
-          {/* Right Column: Hero Visual - Stays coupled with content, stacks on zoom / narrow */}
+          {/* Right Column: Hero Visual */}
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
-            className="lg:col-span-6 xl:col-span-6 relative flex justify-center lg:justify-end items-end w-full lg:-mt-20 xl:-mt-24 pb-8 lg:pb-0"
+            className="lg:col-span-6 xl:col-span-6 relative flex justify-center lg:justify-end items-center w-full py-6 lg:py-10"
           >
-            <div className="relative w-full max-w-[540px] lg:max-w-none aspect-[900/860] lg:min-h-[520px] xl:min-h-[580px]">
-              <Image
-                src="/images/hero-portrait.webp"
+            <div className="relative w-full max-w-[460px] sm:max-w-[500px] lg:max-w-[520px] aspect-square rounded-2xl overflow-hidden shadow-[0_20px_50px_-15px_rgba(0,0,0,0.12)] border border-[#EFE8DF]/80 bg-[#FAF8F5]">
+              <img
+                src={typeof heroPortraitImg === "string" ? heroPortraitImg : heroPortraitImg.src}
                 alt="Ambitious woman reflecting with coffee and inspiring books"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-contain lg:object-cover object-bottom lg:object-top"
+                className="w-full h-full object-cover object-center"
               />
             </div>
           </motion.div>

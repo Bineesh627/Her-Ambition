@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { Calendar, Users, ArrowRight } from "lucide-react";
 
 export interface Program {
@@ -28,13 +27,12 @@ export default function ProgramCard({ program, onSelect }: ProgramCardProps) {
       className="group flex flex-col bg-white border border-[#ECE5DD] rounded-lg overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_25px_-5px_rgba(0,0,0,0.06)] hover:border-[#D5C9BD] cursor-pointer"
     >
       {/* Card Image */}
-      <div className="relative w-full aspect-[2.1/1] overflow-hidden bg-[#FAF8F5]">
-        <Image
+      <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#FAF8F5]">
+        <img
           src={program.image}
           alt={program.title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 380px"
-          className="object-cover object-center transform transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+          className="w-full h-full object-cover object-center transform transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+          loading="lazy"
         />
       </div>
 

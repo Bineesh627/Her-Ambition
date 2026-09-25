@@ -1,6 +1,9 @@
 "use client";
 
 import React from "react";
+import programBecomingImg from "../../public/images/program-becoming.webp";
+import programInfluenceImg from "../../public/images/program-influence.webp";
+import programFoundherImg from "../../public/images/program-foundher.webp";
 import { ArrowRight } from "lucide-react";
 import ProgramCard, { Program } from "./ProgramCard";
 
@@ -13,7 +16,7 @@ const programsData: Program[] = [
       "Find clarity, rebuild confidence and create a career plan that works for you.",
     duration: "4 - 6 Weeks",
     audience: "For women restarting or realigning their careers",
-    image: "/images/program-becoming.webp",
+    image: typeof programBecomingImg === "string" ? programBecomingImg : programBecomingImg.src,
     fullOverview:
       "A transformative career accelerator tailored for women returning to the workforce or seeking a pivotal career pivot. Includes 1-on-1 strategy sessions, peer cohorts, and dedicated industry mentorship.",
     curriculum: [
@@ -31,7 +34,7 @@ const programsData: Program[] = [
       "Strengthen your leadership skills, visibility and impact in the workplace.",
     duration: "4 - 6 Weeks",
     audience: "For mid to senior women professionals",
-    image: "/images/program-influence.webp",
+    image: typeof programInfluenceImg === "string" ? programInfluenceImg : programInfluenceImg.src,
     fullOverview:
       "HerInfluence helps women strengthen their leadership presence, influence and visibility within their organisation, preparing them for greater responsibility and career growth.",
     curriculum: [
@@ -51,7 +54,7 @@ const programsData: Program[] = [
       "Turn your ideas into sustainable ventures with the right tools, network and guidance.",
     duration: "4 - 6 Weeks",
     audience: "For aspiring and early-stage women founders",
-    image: "/images/program-foundher.webp",
+    image: typeof programFoundherImg === "string" ? programFoundherImg : programFoundherImg.src,
     fullOverview:
       "A practical growth program designed to help women founders build clarity, strengthen their brand and execute their next stage of growth.",
     curriculum: [

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import { X, Calendar, Users, CheckCircle, ArrowRight } from "lucide-react";
 import { Program } from "./ProgramCard";
 
@@ -30,12 +29,10 @@ export default function ProgramModal({
         
         {/* Modal Header Image */}
         <div className="relative w-full h-44 sm:h-52 flex-shrink-0 bg-[#FAF8F5]">
-          <Image
+          <img
             src={program.image}
             alt={program.title}
-            fill
-            sizes="700px"
-            className="object-cover object-center"
+            className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
           

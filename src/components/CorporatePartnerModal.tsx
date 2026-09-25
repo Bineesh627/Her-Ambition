@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { X, CheckCircle2, Building2, MessageSquare, Send } from "lucide-react";
+import { X, CheckCircle2, Building2, Send } from "lucide-react";
 
 interface CorporatePartnerModalProps {
   isOpen: boolean;
@@ -106,12 +106,12 @@ export default function CorporatePartnerModal({
       } else {
         console.error("Web3Forms error:", res);
         setErrorMessage(
-          res.message || "Something went wrong. Please try again or reach out on WhatsApp."
+          res.message || "Something went wrong. Please try again or contact us directly."
         );
       }
     } catch (err) {
       console.error("Submission error:", err);
-      setErrorMessage("Network error. Please try again or reach out on WhatsApp.");
+      setErrorMessage("Network error. Please try again or contact us directly.");
     } finally {
       setIsSubmitting(false);
     }
@@ -296,22 +296,12 @@ export default function CorporatePartnerModal({
                 </div>
               )}
 
-              {/* Submit & WhatsApp */}
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
-                <a
-                  href="https://chat.whatsapp.com/BfPFwGkAPTNH72j2Bbnx2J?s=cl&p=i&mlu=4&ilr=4"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-[13px] font-medium text-[#25D366] hover:text-[#1EBE5D] px-3 py-2 rounded-lg hover:bg-[#25D366]/10 transition-colors"
-                >
-                  <MessageSquare className="w-4 h-4" />
-                  Direct WhatsApp Inquiry
-                </a>
-
+              {/* Submit Button */}
+              <div className="pt-2 flex justify-end">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#BF8237] hover:bg-[#A86F28] disabled:opacity-75 text-white px-6 py-2.5 rounded-[4px] text-[13.5px] font-medium shadow-xs hover:shadow-md transition-all cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#BF8237] hover:bg-[#A86F28] disabled:opacity-75 text-white px-7 py-2.5 rounded-[4px] text-[13.5px] font-medium shadow-xs hover:shadow-md transition-all cursor-pointer"
                 >
                   {isSubmitting ? (
                     <span>Sending...</span>
