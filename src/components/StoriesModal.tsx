@@ -110,7 +110,7 @@ export default function StoriesModal({
             onClick={onClose}
             className="bg-[#B44A63] hover:bg-[#9E3D54] text-white text-xs font-medium uppercase tracking-wider px-5 py-2.5 rounded-[4px] inline-flex items-center"
           >
-            Join HerAmbition
+            Join the Community
           </a>
         </div>
 

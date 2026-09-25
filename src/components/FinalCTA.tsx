@@ -113,7 +113,7 @@ export default function FinalCTA({ onJoin }: FinalCTAProps) {
               sm:text-sm
             "
           >
-            <span>Join HerAmbition</span>
+            <span>Join the Community</span>
             <span className="ml-2 shrink-0">
               →
             </span>

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://herambition.org"),
   title: "HerAmbition — Lead with Grace & Impact | Women's Leadership & Career Community",
   description:
-    "Practical programs, a supportive community and real opportunities to help you restart, grow and lead — on your terms. Join 500+ ambitious women today.",
+    "Practical programs and a supportive community empowering women to return to work, rebuild confidence, and lead — on your terms. Join 500+ ambitious women today.",
   keywords: [
     "women leadership",
     "career restart",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "HerAmbition — Lead with Grace & Impact",
     description:
-      "Practical programs, a supportive community and real opportunities to help you restart, grow and lead — on your terms.",
+      "Practical programs and a supportive community empowering women to return to work, rebuild confidence, and lead — on your terms.",
     url: "https://herambition.org",
     siteName: "HerAmbition",
     images: [
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "HerAmbition — Lead with Grace & Impact",
     description:
-      "Practical programs, a supportive community and real opportunities to help you restart, grow and lead — on your terms.",
+      "Practical programs and a supportive community empowering women to return to work, rebuild confidence, and lead — on your terms.",
     images: ["/images/hero-portrait.webp"],
   },
   robots: {

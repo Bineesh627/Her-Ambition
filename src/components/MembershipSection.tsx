@@ -10,7 +10,8 @@ interface MembershipSectionProps {
 
 export default function MembershipSection({ onJoinMembership }: MembershipSectionProps) {
   return (
-    <section id="membership" className="py-14 sm:py-16 md:py-20 lg:py-24 bg-white overflow-hidden">
+    <section id="community" className="py-14 sm:py-16 md:py-20 lg:py-24 bg-white overflow-hidden scroll-mt-20">
+      <div id="membership" className="sr-only" aria-hidden="true" />
       <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
           
@@ -32,7 +33,7 @@ export default function MembershipSection({ onJoinMembership }: MembershipSectio
             
             <div className="flex-1 w-full max-w-xl">
               <p className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] text-[#6E6762] uppercase mb-3">
-                HERAMBITION MEMBERSHIP
+                HERAMBITION COMMUNITY
               </p>
 
               <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-[40px] xl:text-[44px] font-normal leading-[1.15] text-[#1E1C1A] tracking-tight mb-4">
@@ -42,7 +43,7 @@ export default function MembershipSection({ onJoinMembership }: MembershipSectio
               <p className="text-[15px] sm:text-[16px] leading-relaxed text-[#5A5550] font-normal mb-8">
                 Join a vibrant community of ambitious women at every stage of
                 their journey. Access curated conversations, resources,
-                mentorship and real opportunities.
+                mentorship and peer support.
               </p>
 
               <div>
@@ -52,7 +53,7 @@ export default function MembershipSection({ onJoinMembership }: MembershipSectio
                   rel="noopener noreferrer"
                   className="inline-flex items-center border border-[#B44A63] hover:bg-[#B44A63] text-[#B44A63] hover:text-white text-[13.5px] sm:text-[14px] font-medium tracking-wide px-7 py-3 rounded-[4px] transition-all duration-200 active:scale-[0.98] cursor-pointer group"
                 >
-                  <span>Become a Member</span>
+                  <span>Join the Community</span>
                   <span className="ml-2 transform transition-transform duration-200 group-hover:translate-x-1">
                     &rarr;
                   </span>

@@ -42,19 +42,6 @@ export default function Hero({ onExplorePrograms }: HeroProps) {
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center pt-20 sm:pt-24 lg:pt-32 pb-8 sm:pb-12 lg:pb-16"
           >
-            {/* Eyebrow */}
-            <div className="flex flex-wrap items-center gap-x-2 sm:gap-x-2.5 gap-y-1.5 text-[10.5px] sm:text-[11.5px] font-semibold tracking-[0.14em] sm:tracking-[0.22em] text-[#554F4B] uppercase mb-4 sm:mb-5 max-w-full">
-              <span className="inline-flex items-center gap-2 shrink-0">
-                <span>WOMEN</span>
-                <span className="text-[#C4BCB4]" aria-hidden="true">|</span>
-              </span>
-              <span className="inline-flex items-center gap-2 shrink-0">
-                <span>WORK</span>
-                <span className="text-[#C4BCB4]" aria-hidden="true">|</span>
-              </span>
-              <span className="shrink-0">BRIGHTER FUTURES</span>
-            </div>
-
             {/* Headline */}
             <h1 className="font-serif text-[34px] min-[380px]:text-[38px] sm:text-[46px] md:text-[52px] lg:text-[56px] xl:text-[60px] font-normal leading-[1.1] sm:leading-[1.08] text-[#1E1C1A] tracking-[-0.015em] mb-4 sm:mb-5 break-words">
               Your Next
@@ -65,8 +52,8 @@ export default function Hero({ onExplorePrograms }: HeroProps) {
 
             {/* Supporting paragraph */}
             <p className="text-[15px] sm:text-[16px] leading-[1.65] text-[#554F4B] font-normal w-full max-w-xl lg:max-w-[480px] mb-8 sm:mb-10">
-              Practical programs, a supportive community and real opportunities
-              to help you restart, grow and lead — on your terms.
+              Practical programs and a supportive community designed to empower
+              women to return to work, rebuild confidence, and lead — on your terms.
             </p>
 
             {/* Action Buttons */}
@@ -108,7 +95,7 @@ export default function Hero({ onExplorePrograms }: HeroProps) {
                   {statsCount.percent}%
                 </span>
                 <span className="text-[11.5px] leading-snug text-[#6E6762] font-normal">
-                  Members return to work or grow in role
+                  Women return to work or grow in role
                 </span>
               </div>
 

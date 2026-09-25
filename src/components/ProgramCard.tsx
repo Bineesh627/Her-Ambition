@@ -72,7 +72,7 @@ export default function ProgramCard({ program, onSelect }: ProgramCardProps) {
           </div>
 
           {/* Learn More link */}
-          <div className="inline-flex items-center text-[13px] font-medium text-[#B44A63] group-hover:text-[#9A3E55] transition-colors duration-200">
+          <div className="inline-flex items-center text-[13px] font-medium text-[#B44A63] group-hover:text-[#9E3D54] transition-colors duration-200">
             <span>Learn More</span>
             <span className="ml-1 transform transition-transform duration-200 group-hover:translate-x-1">
               &rarr;

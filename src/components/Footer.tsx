@@ -9,7 +9,7 @@ export default function Footer() {
     { name: "About", href: "#about" },
     { name: "Programs", href: "#programs" },
     { name: "Career Readiness", href: "#career-readiness" },
-    { name: "Membership", href: "#membership" },
+    { name: "Community", href: "#community" },
     { name: "Events", href: "#events" },
     { name: "Contact", href: "#contact" },
   ];

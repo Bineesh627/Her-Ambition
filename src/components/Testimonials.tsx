@@ -59,7 +59,7 @@ export default function Testimonials({ onSeeMoreStories }: TestimonialsProps) {
           <div className="mt-4 md:mt-0">
             <button
               onClick={onSeeMoreStories}
-              className="inline-flex items-center text-[13.5px] font-medium text-[#B44A63] hover:text-[#9A3E55] group cursor-pointer transition-colors"
+              className="inline-flex items-center text-[13.5px] font-medium text-[#B44A63] hover:text-[#9E3D54] group cursor-pointer transition-colors"
             >
               <span className="underline underline-offset-4 decoration-[#B44A63]">
                 See More Stories

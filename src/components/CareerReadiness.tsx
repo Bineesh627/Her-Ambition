@@ -28,17 +28,17 @@ export default function CareerReadiness({
 
           {/* Left Column */}
           <div className="min-w-0 w-full">
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#8C5D6B] sm:text-xs">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#B44A63] sm:text-xs">
               CAREER READINESS
             </p>
 
             <h2 className="mb-4 font-serif text-2xl font-normal leading-[1.15] tracking-tight text-[#1E1C1A] sm:mb-5 sm:text-3xl md:text-4xl lg:text-[42px] xl:text-[46px]">
-              Get Job-Ready with Confidence.
+              Return to Work with Confidence.
             </h2>
 
             <p className="mb-8 w-full max-w-xl text-[15px] font-normal leading-relaxed text-[#5A5350] sm:text-[16px]">
-              A practical, hands-on program to help you return to work with the
-              right skills, tools and mindset.
+              A practical, hands-on program to empower women to return to work
+              with the right skills, tools and mindset.
             </p>
 
             <a
@@ -72,7 +72,7 @@ export default function CareerReadiness({
                       >
                         <IconComponent
                           size={20}
-                          className="shrink-0 text-[#8C5D6B] transition-colors group-hover:text-[#B44A63]"
+                          className="shrink-0 text-[#B44A63]"
                           strokeWidth={1.75}
                         />
 
@@ -88,11 +88,11 @@ export default function CareerReadiness({
               {/* Handwritten Note */}
               <div className="w-full shrink-0 lg:w-[150px]">
                 <div className="select-none rotate-[-2deg] text-center font-script text-[26px] leading-[1.18] text-[#3E3836] sm:text-[30px] lg:text-left">
-                  Skills
+                  Clarity
                   <br />
                   Today,
                   <br />
-                  Opportunities
+                  Confidence
                   <br />
                   Tomorrow
                   <span className="ml-1 text-[#B44A63]">♡</span>

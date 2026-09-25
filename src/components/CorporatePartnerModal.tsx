@@ -31,6 +31,8 @@ export default function CorporatePartnerModal({
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const toggleSolution = (sol: string) => {
     if (sol === "All the above") {
@@ -73,9 +75,46 @@ export default function CorporatePartnerModal({
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setErrorMessage("");
+
+    const formEl = e.currentTarget;
+    const data = new FormData(formEl);
+
+    const accessKey =
+      process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "32c31f3f-96fb-4ef1-960f-eab81c8ff23f";
+    data.append("access_key", accessKey);
+    data.append("from_name", "HerAmbition Corporate Partnerships");
+    data.append(
+      "subject",
+      `Corporate Partnership Inquiry from ${formData.company || formData.name}`
+    );
+    data.append("selected_solutions", selectedSolutions.join(", "));
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: data,
+      });
+
+      const res = await response.json();
+
+      if (res.success) {
+        setSubmitted(true);
+      } else {
+        console.error("Web3Forms error:", res);
+        setErrorMessage(
+          res.message || "Something went wrong. Please try again or reach out on WhatsApp."
+        );
+      }
+    } catch (err) {
+      console.error("Submission error:", err);
+      setErrorMessage("Network error. Please try again or reach out on WhatsApp.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -114,7 +153,7 @@ export default function CorporatePartnerModal({
             Build an Inclusive Workforce
           </h2>
           <p className="text-[13.5px] text-[#6E6762]">
-            Partner with HerAmbition to access experienced female talent, launch returnship cohorts, or elevate your women leaders.
+            Partner with HerAmbition to launch returnship cohorts, support women returning to work, or elevate your women leaders.
           </p>
         </div>
 
@@ -193,6 +232,7 @@ export default function CorporatePartnerModal({
                   </label>
                   <input
                     type="text"
+                    name="name"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -206,6 +246,7 @@ export default function CorporatePartnerModal({
                   </label>
                   <input
                     type="email"
+                    name="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -224,6 +265,7 @@ export default function CorporatePartnerModal({
                   <Building2 className="w-4 h-4 text-[#8A847F] absolute left-3.5 top-3" />
                   <input
                     type="text"
+                    name="company"
                     required
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
@@ -240,12 +282,19 @@ export default function CorporatePartnerModal({
                 </label>
                 <textarea
                   rows={3}
+                  name="message"
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="e.g., We are looking to design a 12-week Returnship program for 20 returning software and product leaders..."
                   className="w-full px-3.5 py-2.5 text-[13.5px] rounded-lg border border-[#DDD6CE] focus:border-[#BF8237] focus:outline-none transition-colors resize-none"
                 />
               </div>
+
+              {errorMessage && (
+                <div className="p-3 rounded-md bg-[#FDF3F3] border border-[#F5C2C7] text-[#842029] text-[13px] leading-relaxed">
+                  {errorMessage}
+                </div>
+              )}
 
               {/* Submit & WhatsApp */}
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -261,10 +310,17 @@ export default function CorporatePartnerModal({
 
                 <button
                   type="submit"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#BF8237] hover:bg-[#A86F28] text-white px-6 py-2.5 rounded-[4px] text-[13.5px] font-medium shadow-xs hover:shadow-md transition-all cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#BF8237] hover:bg-[#A86F28] disabled:opacity-75 text-white px-6 py-2.5 rounded-[4px] text-[13.5px] font-medium shadow-xs hover:shadow-md transition-all cursor-pointer"
                 >
-                  <Send className="w-4 h-4" />
-                  Submit Inquiry
+                  {isSubmitting ? (
+                    <span>Sending...</span>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>Submit Inquiry</span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>
