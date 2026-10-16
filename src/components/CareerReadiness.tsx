@@ -7,9 +7,7 @@ interface CareerReadinessProps {
   onExplore?: () => void;
 }
 
-export default function CareerReadiness({
-  onExplore,
-}: CareerReadinessProps) {
+export default function CareerReadiness({}: CareerReadinessProps) {
   const features = [
     { title: "Resume & LinkedIn Makeover", icon: FileText },
     { title: "Interview Readiness", icon: Users },

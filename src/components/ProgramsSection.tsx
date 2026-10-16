@@ -4,7 +4,6 @@ import React from "react";
 import programBecomingImg from "../../public/images/program-becoming.webp";
 import programInfluenceImg from "../../public/images/program-influence.webp";
 import programFoundherImg from "../../public/images/program-foundher.webp";
-import { ArrowRight } from "lucide-react";
 import ProgramCard, { Program } from "./ProgramCard";
 
 const programsData: Program[] = [

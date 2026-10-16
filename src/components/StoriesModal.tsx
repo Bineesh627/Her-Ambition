@@ -1,19 +1,17 @@
 "use client";
 
 import React from "react";
-import { X, Quote, Sparkles } from "lucide-react";
+import { X, Quote } from "lucide-react";
 import { testimonialsData } from "./Testimonials";
 
 interface StoriesModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onJoin?: () => void;
 }
 
 export default function StoriesModal({
   isOpen,
   onClose,
-  onJoin,
 }: StoriesModalProps) {
   if (!isOpen) return null;
 

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import heroPortraitImg from "../../public/images/hero-portrait.webp";
 import { motion } from "framer-motion";
 
@@ -121,10 +122,13 @@ export default function Hero({ onExplorePrograms }: HeroProps) {
             className="lg:col-span-6 xl:col-span-6 relative flex justify-center lg:justify-end items-center w-full py-6 lg:py-10"
           >
             <div className="relative w-full max-w-[460px] sm:max-w-[500px] lg:max-w-[520px] aspect-square rounded-2xl overflow-hidden shadow-[0_20px_50px_-15px_rgba(0,0,0,0.12)] border border-[#EFE8DF]/80 bg-[#FAF8F5]">
-              <img
-                src={typeof heroPortraitImg === "string" ? heroPortraitImg : heroPortraitImg.src}
+              <Image
+                src={heroPortraitImg}
                 alt="Ambitious woman reflecting with coffee and inspiring books"
-                className="w-full h-full object-cover object-center"
+                fill
+                sizes="(max-width: 1024px) 100vw, 520px"
+                className="object-cover object-center"
+                priority
               />
             </div>
           </motion.div>

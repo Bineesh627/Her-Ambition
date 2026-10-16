@@ -9,7 +9,6 @@ import {
   Sparkles,
   ArrowRight,
   Calendar,
-  Clock,
   ExternalLink,
 } from "lucide-react";
 
