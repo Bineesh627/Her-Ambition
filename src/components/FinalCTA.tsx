@@ -3,11 +3,7 @@
 import React from "react";
 import Image from "next/image";
 
-interface FinalCTAProps {
-  onJoin?: () => void;
-}
-
-export default function FinalCTA({ onJoin }: FinalCTAProps) {
+export default function FinalCTA() {
   return (
     <section
       className="

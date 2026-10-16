@@ -4,11 +4,7 @@ import React, { useState, useEffect } from "react";
 import Logo from "./Logo";
 import { Menu, X } from "lucide-react";
 
-interface HeaderProps {
-  onOpenJoinModal?: () => void;
-}
-
-export default function Header({ onOpenJoinModal }: HeaderProps = {}) {
+export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("Home");

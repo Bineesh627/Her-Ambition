@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { Calendar, Users, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { Calendar, Users } from "lucide-react";
 
 export interface Program {
   id: string;
@@ -28,11 +29,12 @@ export default function ProgramCard({ program, onSelect }: ProgramCardProps) {
     >
       {/* Card Image */}
       <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#FAF8F5]">
-        <img
+        <Image
           src={program.image}
           alt={program.title}
-          className="w-full h-full object-cover object-center transform transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-          loading="lazy"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover object-center transform transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         />
       </div>
 
