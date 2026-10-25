@@ -80,7 +80,7 @@ export default function FounderModal({ isOpen, onClose }: FounderModalProps) {
                 HR Practitioner · CIPD Certified · Mentor · Builder of Communities
               </p>
               <p className="text-[12.5px] text-[#6E6762] mt-0.5">
-                15+ years experience · Ex-Swiss Re &amp; NHS · Startup CHRO
+                18+ years experience · Ex-Swiss Re &amp; NHS · Startup CHRO
               </p>
             </div>
           </div>

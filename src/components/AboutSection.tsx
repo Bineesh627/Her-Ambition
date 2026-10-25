@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { GraduationCap } from "lucide-react";
 
 interface AboutSectionProps {
   onOpenFounderJourney?: () => void;
@@ -22,26 +23,34 @@ export default function AboutSection({ onOpenFounderJourney }: AboutSectionProps
             <div className="col-span-7 flex flex-col justify-center order-1">
               
               {/* Eyebrow */}
-              <p className="text-[9.5px] sm:text-xs font-semibold tracking-[0.14em] sm:tracking-[0.2em] text-[#6E6762] uppercase mb-1.5 sm:mb-3">
-                MEET THE FOUNDER
+              <p className="text-[9.5px] sm:text-xs font-semibold tracking-[0.14em] sm:tracking-[0.2em] text-[#B44A63] uppercase mb-1.5 sm:mb-3">
+                ABOUT HERAMBITION
               </p>
 
               {/* Headline */}
-              <h2 className="font-serif text-[20px] min-[360px]:text-[22px] min-[400px]:text-[26px] sm:text-3xl md:text-[40px] lg:text-[44px] font-normal leading-[1.12] text-[#1E1C1A] tracking-tight mb-1.5 sm:mb-4">
-                Hi, I&apos;m Tabassum Sait
+              <h2 className="font-serif text-[20px] min-[360px]:text-[22px] min-[400px]:text-[26px] sm:text-3xl md:text-[40px] lg:text-[44px] font-semibold leading-[1.12] text-[#1E1C1A] tracking-tight mb-1.5 sm:mb-3">
+                Hi, I’m Tabassum Sait
               </h2>
 
-              {/* Subheading / Tagline */}
-              <p className="text-[11px] min-[400px]:text-[12.5px] sm:text-[15px] lg:text-[16.5px] font-semibold text-[#2D2824] mb-2 sm:mb-5 leading-snug">
-                HR Practitioner · CIPD Certified · Mentor · Builder of Communities
+              {/* Subheading */}
+              <p className="font-serif text-[12px] min-[400px]:text-[13.5px] sm:text-[17px] lg:text-[19px] font-semibold text-[#2D2824] mb-2.5 sm:mb-5 leading-snug">
+                Founder, HerAmbition
               </p>
 
               {/* Biography Body */}
-              <p className="text-[11px] min-[400px]:text-[12.5px] sm:text-[15px] lg:text-[16px] leading-[1.5] sm:leading-[1.7] text-[#5A5550] font-normal w-full max-w-xl mb-3 sm:mb-9">
-                With 15+ years of experience across global organizations like Swiss Re and NHS,
-                and as a CHRO in startups, I founded HerAmbition to create a career comeback
-                ecosystem for experienced professionals.
-              </p>
+              <div className="w-full max-w-xl space-y-2.5 sm:space-y-5 mb-4 sm:mb-9 text-[11px] min-[400px]:text-[12.5px] sm:text-[15px] lg:text-[16px] leading-[1.5] sm:leading-[1.7] text-[#4F4A46] font-normal">
+                <p>
+                  I’ve spent over 18 years in recruitment and talent acquisition, helping
+                  organisations find and grow talent. I’m a CIPD member with a Master’s degree
+                  in HR Management.
+                </p>
+                <p>
+                  HerAmbition was born from my passion to support talented women through career
+                  transitions, especially maternity leave, career breaks and their return to
+                  work. I believe that with the right support, women can continue to grow, lead
+                  and create impact at every stage of their career.
+                </p>
+              </div>
 
               {/* CTA Button */}
               <div>
@@ -68,7 +77,7 @@ export default function AboutSection({ onOpenFounderJourney }: AboutSectionProps
                 <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-[0_6px_25px_-6px_rgba(0,0,0,0.08)] bg-[#FDFBF9] border border-[#EFE8DF]/60">
                   <Image
                     src="/images/founder-about.webp"
-                    alt="Tabassum Sait — HR Practitioner, CIPD Certified, Mentor and Founder of HerAmbition"
+                    alt="Tabassum Sait — Founder of HerAmbition"
                     width={768}
                     height={1024}
                     priority
@@ -83,17 +92,50 @@ export default function AboutSection({ onOpenFounderJourney }: AboutSectionProps
                         Tabassum Sait
                       </p>
                       <p className="text-[8px] sm:text-[10.5px] text-[#78716A] leading-tight">
-                        Founder &amp; Chief Mentor
+                        Founder &amp; Chief Strategist
                       </p>
                     </div>
                     <span className="text-[7.5px] sm:text-[10.5px] font-medium text-[#BF8237] bg-[#BF8237]/10 px-1 sm:px-2 py-0.5 rounded-full self-start min-[420px]:self-auto whitespace-nowrap">
-                      15+ Yrs Exp
+                      18+ Yrs Exp
                     </span>
                   </div>
                 </div>
               </div>
             </div>
 
+          </div>
+
+          {/* Credentials row */}
+          <div className="mx-auto mt-8 sm:mt-14 grid max-w-3xl grid-cols-3 gap-2 sm:gap-8">
+            {/* 18+ years */}
+            <div className="flex flex-col items-center text-center">
+              <span className="mb-2.5 sm:mb-4 flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-full border-[1.5px] border-[#4A1F33] font-serif text-[14px] sm:text-[19px] font-semibold text-[#4A1F33]">
+                18+
+              </span>
+              <p className="font-serif text-[11px] min-[400px]:text-[12px] sm:text-[15px] leading-snug text-[#5A5550]">
+                years of experience in recruitment and talent acquisition
+              </p>
+            </div>
+
+            {/* Master's degree */}
+            <div className="flex flex-col items-center text-center">
+              <span className="mb-2.5 sm:mb-4 flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-full border-[1.5px] border-[#4A1F33] text-[#4A1F33]">
+                <GraduationCap className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={1.6} />
+              </span>
+              <p className="font-serif text-[11px] min-[400px]:text-[12px] sm:text-[15px] leading-snug text-[#5A5550]">
+                Master’s degree in HR Management
+              </p>
+            </div>
+
+            {/* CIPD */}
+            <div className="flex flex-col items-center text-center">
+              <span className="mb-2.5 sm:mb-4 flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-[#4A1F33] text-[10px] sm:text-[13px] font-semibold tracking-wide text-white">
+                CIPD
+              </span>
+              <p className="font-serif text-[11px] min-[400px]:text-[12px] sm:text-[15px] leading-snug text-[#5A5550]">
+                CIPD Member
+              </p>
+            </div>
           </div>
         </div>
       </div>

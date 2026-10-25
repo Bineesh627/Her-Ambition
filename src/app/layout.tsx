@@ -100,8 +100,8 @@ export default function RootLayout({
         founder: {
           "@type": "Person",
           name: "Tabassum Sait",
-          jobTitle: "Founder & Chief Mentor",
-          description: "HR Practitioner, CIPD Certified, Mentor and Builder of Communities with 15+ years experience across Swiss Re, NHS, and startups.",
+          jobTitle: "Founder & Chief Strategist",
+          description: "HR Practitioner, CIPD Certified, Mentor and Builder of Communities with 18+ years experience across Swiss Re, NHS, and startups.",
         },
         sameAs: [
           "https://chat.whatsapp.com/BfPFwGkAPTNH72j2Bbnx2J?s=cl&p=i&mlu=4&ilr=4",

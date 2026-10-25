@@ -14,7 +14,7 @@ const pathways = [
   },
   {
     title: "For Organisations",
-    text: "Support working women and retain talent.",
+    text: "Inclusive workplaces. Supported women. Stronger talent retention.",
     href: "#for-organisations",
     icon: Building2,
   },

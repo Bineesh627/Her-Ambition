@@ -1,7 +1,9 @@
 // ---------------------------------------------------------------------------
 // EVENTS CALENDAR DATA
-// NOTE: these are SAMPLE events so the calendar is not empty.
-// Replace / add your real events here — the calendar updates automatically.
+// Manual events. Events from Cal.com are added automatically (see /api/events).
+// The entries marked `sample: true` are placeholders: they are hidden
+// automatically once Cal.com is connected, and you can delete them any time.
+// Add your own manual events here too (without `sample`) if you want.
 // date format: "YYYY-MM-DD"
 // ---------------------------------------------------------------------------
 export interface CalendarEvent {
@@ -12,6 +14,7 @@ export interface CalendarEvent {
   type: "Community" | "Workshop" | "Webinar" | "Programme";
   description: string;
   link?: string; // optional registration / WhatsApp link
+  sample?: boolean; // placeholder, hidden once Cal.com is connected
 }
 
 export const events: CalendarEvent[] = [
@@ -22,6 +25,7 @@ export const events: CalendarEvent[] = [
     time: "11:00 AM IST",
     type: "Community",
     description: "An open community conversation for women restarting their careers.",
+    sample: true,
   },
   {
     id: "e2",
@@ -30,6 +34,7 @@ export const events: CalendarEvent[] = [
     time: "4:00 PM IST",
     type: "Workshop",
     description: "Hands-on session to refresh your resume and LinkedIn profile.",
+    sample: true,
   },
   {
     id: "e3",
@@ -38,6 +43,7 @@ export const events: CalendarEvent[] = [
     time: "6:00 PM IST",
     type: "Programme",
     description: "Learn how the 6-week leadership programme works and who it is for.",
+    sample: true,
   },
   {
     id: "e4",
@@ -46,6 +52,7 @@ export const events: CalendarEvent[] = [
     time: "3:00 PM IST",
     type: "Webinar",
     description: "A webinar for people managers and HR teams supporting returning mothers.",
+    sample: true,
   },
   {
     id: "e5",
@@ -54,5 +61,6 @@ export const events: CalendarEvent[] = [
     time: "11:00 AM IST",
     type: "Community",
     description: "Monthly meetup to connect, share wins and set intentions.",
+    sample: true,
   },
 ];

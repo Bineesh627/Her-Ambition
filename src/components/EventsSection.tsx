@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Clock, CalendarDays } from "lucide-react";
-import { events, CalendarEvent } from "@/data/events";
+import { events as manualEvents, CalendarEvent } from "@/data/events";
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -19,13 +19,51 @@ const toKey = (y: number, m: number, d: number) => `${y}-${pad(m + 1)}-${pad(d)}
 export default function EventsSection() {
   const today = new Date();
   const todayIso = toKey(today.getFullYear(), today.getMonth(), today.getDate());
-  // Open on the month of the next upcoming event (falls back to the current month)
-  const [view, setView] = useState(() => {
-    const next = [...events].sort((a, b) => a.date.localeCompare(b.date)).find((e) => e.date >= todayIso);
+
+  // Sessions pulled automatically from Cal.com (via /api/events)
+  const [calEvents, setCalEvents] = useState<CalendarEvent[]>([]);
+  const [calConfigured, setCalConfigured] = useState(false);
+  const userNavigated = useRef(false);
+
+  // Manual events; the placeholder samples disappear once Cal.com is connected
+  const events = useMemo(
+    () =>
+      [...manualEvents.filter((e) => !(calConfigured && e.sample)), ...calEvents].sort((a, b) =>
+        a.date.localeCompare(b.date)
+      ),
+    [calConfigured, calEvents]
+  );
+
+  const monthOfNextEvent = (list: CalendarEvent[]) => {
+    const next = list.find((e) => e.date >= todayIso);
     const [y, m] = (next ? next.date : todayIso).split("-").map(Number);
     return { year: y, month: m - 1 };
-  });
+  };
+
+  // Open on the month of the next upcoming event (falls back to the current month)
+  const [view, setView] = useState(() => monthOfNextEvent(manualEvents));
   const [selected, setSelected] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/events")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (cancelled || !data) return;
+        setCalConfigured(!!data.configured);
+        setCalEvents(Array.isArray(data.events) ? data.events : []);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // When the real events arrive, jump to the month of the next one (unless the visitor already navigated)
+  useEffect(() => {
+    if (!userNavigated.current) setView(monthOfNextEvent(events));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [events]);
 
   const monthLabel = new Date(view.year, view.month, 1).toLocaleString("en-US", {
     month: "long",
@@ -38,7 +76,7 @@ export default function EventsSection() {
       (map[e.date] ||= []).push(e);
     });
     return map;
-  }, []);
+  }, [events]);
 
   // Build calendar cells (leading blanks + days of month)
   const firstWeekday = new Date(view.year, view.month, 1).getDay();
@@ -57,6 +95,7 @@ export default function EventsSection() {
   const todayKey = toKey(today.getFullYear(), today.getMonth(), today.getDate());
 
   const changeMonth = (delta: number) => {
+    userNavigated.current = true;
     const d = new Date(view.year, view.month + delta, 1);
     setView({ year: d.getFullYear(), month: d.getMonth() });
     setSelected(null);
