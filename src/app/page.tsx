@@ -6,6 +6,8 @@ import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
 import ProgramsSection, { Program, programsData } from "@/components/ProgramsSection";
 import CareerReadiness from "@/components/CareerReadiness";
+import ForOrganisationsSection from "@/components/ForOrganisationsSection";
+import EventsSection from "@/components/EventsSection";
 import MembershipSection from "@/components/MembershipSection";
 import Testimonials from "@/components/Testimonials";
 import ContactSection from "@/components/ContactSection";
@@ -22,45 +24,39 @@ export default function Home() {
   const [founderModalOpen, setFounderModalOpen] = useState(false);
   const [corporateModalOpen, setCorporateModalOpen] = useState(false);
 
-  const handleExplorePrograms = () => {
-    const el = document.getElementById("programs");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <main className="min-h-screen flex flex-col bg-white text-[#1E1C1A]">
-      {/* 1. Header & Navigation */}
+      {/* Header & Navigation: Home / About the Founder / For Individuals / For Organisations / Community / Events / Contact */}
       <Header />
 
-      {/* 2. Hero Section */}
-      <Hero onExplorePrograms={handleExplorePrograms} />
+      {/* Home: Hero */}
+      <Hero />
 
-      {/* 2.5. About Section (Meet the Founder & Corporate Solutions) */}
-      <AboutSection
-        onOpenFounderJourney={() => setFounderModalOpen(true)}
-        onOpenCorporatePartner={() => setCorporateModalOpen(true)}
-      />
+      {/* About the Founder */}
+      <AboutSection onOpenFounderJourney={() => setFounderModalOpen(true)} />
 
-      {/* 3. Programs Section */}
+      {/* For Individuals (programmes) */}
       <ProgramsSection
         onSelectProgram={(program) => setSelectedProgram(program)}
         onViewAllPrograms={() => setSelectedProgram(programsData[0])}
       />
 
-      {/* 4. Career Readiness Section */}
+      {/* Career Readiness: kept on the page (not in navbar), sits under For Individuals */}
       <CareerReadiness />
 
-      {/* 5. Membership Section */}
+      {/* For Organisations */}
+      <ForOrganisationsSection onEnquire={() => setCorporateModalOpen(true)} />
+
+      {/* Community: join us */}
       <MembershipSection />
 
-      {/* 6. Testimonials Section */}
-      <Testimonials
-        onSeeMoreStories={() => setStoriesModalOpen(true)}
-      />
+      {/* Alumnae stories */}
+      <Testimonials onSeeMoreStories={() => setStoriesModalOpen(true)} />
 
-      {/* 6.5. Contact Section */}
+      {/* Events: calendar */}
+      <EventsSection />
+
+      {/* Contact: form, scheduling and social media */}
       <ContactSection />
 
       {/* 7. Final Call to Action */}

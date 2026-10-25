@@ -6,9 +6,9 @@ import Logo from "./Logo";
 export default function Footer() {
   const links = [
     { name: "Home", href: "#" },
-    { name: "About", href: "#about" },
-    { name: "Programs", href: "#programs" },
-    { name: "Career Readiness", href: "#career-readiness" },
+    { name: "About the Founder", href: "#about" },
+    { name: "For Individuals", href: "#for-individuals" },
+    { name: "For Organisations", href: "#for-organisations" },
     { name: "Community", href: "#community" },
     { name: "Events", href: "#events" },
     { name: "Contact", href: "#contact" },

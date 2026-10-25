@@ -1,13 +1,38 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Logo from "./Logo";
 import { Menu, X } from "lucide-react";
 
-export default function Header() {
+interface HeaderProps {
+  onOpenJoinModal?: () => void;
+}
+
+export default function Header({ onOpenJoinModal }: HeaderProps = {}) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("Home");
+  const headerRef = useRef<HTMLElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(64);
+
+  // Measure the real header height so the mobile drawer always starts exactly below it
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const update = () => setHeaderHeight(el.offsetHeight);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  // Lock page scroll while the mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,9 +44,9 @@ export default function Header() {
 
   const navItems = [
     { name: "Home", href: "#" },
-    { name: "About", href: "#about" },
-    { name: "Programs", href: "#programs" },
-    { name: "Career Readiness", href: "#career-readiness" },
+    { name: "About the Founder", href: "#about" },
+    { name: "For Individuals", href: "#for-individuals" },
+    { name: "For Organisations", href: "#for-organisations" },
     { name: "Community", href: "#community" },
     { name: "Events", href: "#events" },
     { name: "Contact", href: "#contact" },
@@ -30,7 +55,10 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        ref={headerRef}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${mobileMenuOpen
+            ? "bg-white border-b border-[#EBE4DC] py-2 sm:py-2.5"
+            : isScrolled
             ? "bg-white/95 backdrop-blur-md border-b border-[#EBE4DC] py-2 sm:py-2.5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.04)]"
             : "bg-transparent py-2.5 sm:py-4 lg:py-5 border-b border-transparent"
           }`}
@@ -101,14 +129,18 @@ export default function Header() {
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 lg:hidden">
-          {/* Backdrop */}
+          {/* Backdrop (starts below the header so the header stays crisp) */}
           <div
-            className="fixed inset-0 bg-black/30 backdrop-blur-xs transition-opacity"
+            className="absolute inset-x-0 bottom-0 bg-black/30 transition-opacity"
+            style={{ top: headerHeight }}
             onClick={() => setMobileMenuOpen(false)}
           />
 
           {/* Menu Drawer */}
-          <div className="fixed top-16 right-0 bottom-0 w-4/5 max-w-sm bg-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto animate-in slide-in-from-right duration-200">
+          <div
+            className="absolute right-0 bottom-0 w-[85%] max-w-sm bg-white shadow-2xl border-l border-[#EBE4DC] p-6 flex flex-col justify-between overflow-y-auto animate-in slide-in-from-right duration-200"
+            style={{ top: headerHeight }}
+          >
             <div className="space-y-6">
               <div className="border-b border-[#EAE4DC] pb-4">
                 <p className="text-xs uppercase tracking-widest text-[#B44A63] font-semibold">

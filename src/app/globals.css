@@ -2,10 +2,10 @@
 
 @theme {
   /* Fonts */
-  --font-serif: var(--font-playfair), Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI",
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, sans-serif;
-  --font-script: var(--font-caveat), cursive;
+  --font-script: "Caveat", cursive;
 
   /* Brand Colors */
   --color-brand-rose: #B44A63;

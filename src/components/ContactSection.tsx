@@ -9,6 +9,7 @@ import {
   Sparkles,
   ArrowRight,
   Calendar,
+  Clock,
   ExternalLink,
 } from "lucide-react";
 
@@ -80,7 +81,6 @@ export default function ContactSection() {
   return (
     <section id="contact" className="relative bg-[#FAF8F5] py-16 sm:py-20 md:py-24 border-t border-[#ECE5DC] scroll-mt-20">
       <div id="schedule" className="sr-only" aria-hidden="true" />
-      <div id="events" className="sr-only" aria-hidden="true" />
 
       <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -183,6 +183,42 @@ export default function ContactSection() {
                     </p>
                   </div>
                   <ArrowRight size={16} className="text-[#A59D96] group-hover:text-[#B44A63] group-hover:translate-x-0.5 transition-all shrink-0" />
+                </a>
+              </div>
+            </div>
+
+            {/* Social media */}
+            <div className="bg-white rounded-xl p-5 sm:p-6 border border-[#EFE8DF] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)]">
+              <p className="text-[11px] uppercase tracking-widest text-[#B44A63] font-semibold mb-3">
+                Follow us on social media
+              </p>
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href="https://www.instagram.com/herambition.community?stkn=MTZsenJzcTF5Z2NxMQ%3D%3D&utm_source=qr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#EAE3DB] bg-[#FAF8F5] px-4 py-2 text-[13px] font-medium text-[#2B2725] transition-colors hover:border-[#B44A63] hover:text-[#B44A63]"
+                >
+                  <svg className="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                  </svg>{" "}
+                  Instagram
+                </a>
+                <a
+                  href="https://chat.whatsapp.com/BfPFwGkAPTNH72j2Bbnx2J?s=cl&p=i&mlu=4&ilr=4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#EAE3DB] bg-[#FAF8F5] px-4 py-2 text-[13px] font-medium text-[#2B2725] transition-colors hover:border-[#25D366] hover:text-[#1E9E4F]"
+                >
+                  <MessageSquare size={16} /> WhatsApp
+                </a>
+                <a
+                  href="mailto:someone@herambition.co.in"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#EAE3DB] bg-[#FAF8F5] px-4 py-2 text-[13px] font-medium text-[#2B2725] transition-colors hover:border-[#B44A63] hover:text-[#B44A63]"
+                >
+                  <Mail size={16} /> Email
                 </a>
               </div>
             </div>

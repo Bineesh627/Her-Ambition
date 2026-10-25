@@ -7,7 +7,9 @@ interface CareerReadinessProps {
   onExplore?: () => void;
 }
 
-export default function CareerReadiness({}: CareerReadinessProps) {
+export default function CareerReadiness({
+  onExplore,
+}: CareerReadinessProps) {
   const features = [
     { title: "Resume & LinkedIn Makeover", icon: FileText },
     { title: "Interview Readiness", icon: Users },
@@ -18,7 +20,7 @@ export default function CareerReadiness({}: CareerReadinessProps) {
   return (
     <section
       id="career-readiness"
-      className="relative overflow-hidden bg-[#FDF1EE] py-14 sm:py-16 md:py-20 lg:py-24"
+      className="relative overflow-hidden bg-[#FDF1EE] scroll-mt-20 py-14 sm:py-16 md:py-20 lg:py-24"
     >
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8">
         {/* Main responsive layout */}

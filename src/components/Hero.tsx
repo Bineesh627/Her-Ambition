@@ -1,16 +1,26 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import heroPortraitImg from "../../public/images/hero-portrait.webp";
 import { motion } from "framer-motion";
+import { User, Building2, ChevronRight } from "lucide-react";
 
-interface HeroProps {
-  onExplorePrograms: () => void;
-  onJoinCommunity?: () => void;
-}
+const pathways = [
+  {
+    title: "For Individuals",
+    text: "Build your career, confidence and leadership.",
+    href: "#for-individuals",
+    icon: User,
+  },
+  {
+    title: "For Organisations",
+    text: "Support working women and retain talent.",
+    href: "#for-organisations",
+    icon: Building2,
+  },
+];
 
-export default function Hero({ onExplorePrograms }: HeroProps) {
+export default function Hero() {
   // Animated statistics counter
   const [statsCount, setStatsCount] = useState({ women: 0, percent: 0, programs: 0 });
 
@@ -57,57 +67,64 @@ export default function Hero({ onExplorePrograms }: HeroProps) {
               women to return to work, rebuild confidence, and lead — on your terms.
             </p>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3.5 sm:gap-4 mb-10 sm:mb-12">
-              <button
-                onClick={onExplorePrograms}
-                className="bg-[#B44A63] hover:bg-[#9E3D54] text-white text-[14px] font-medium tracking-wide px-7 py-3.5 rounded-[4px] shadow-xs transition-all duration-200 active:scale-[0.98] hover:shadow-md cursor-pointer"
-              >
-                Explore Programs
-              </button>
-
-              <a
-                href="https://chat.whatsapp.com/BfPFwGkAPTNH72j2Bbnx2J?s=cl&p=i&mlu=4&ilr=4"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border border-[#B44A63] hover:bg-[#B44A63]/5 text-[#1E1C1A] hover:text-[#B44A63] text-[14px] font-medium tracking-wide px-6 py-3.5 rounded-[4px] transition-all duration-200 active:scale-[0.98] cursor-pointer inline-flex items-center justify-center"
-              >
-                Join the Community
-              </a>
+            {/* Pathway Cards: For Individuals / For Organisations */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 w-full max-w-xl mb-10 sm:mb-12">
+              {pathways.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <a
+                    key={item.title}
+                    href={item.href}
+                    className="group flex items-center gap-3.5 rounded-xl border border-[#EBE2DA] bg-gradient-to-br from-[#FDF5F3] to-white px-4 py-4 shadow-[0_6px_20px_-10px_rgba(180,74,99,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#B44A63]/50 hover:shadow-[0_10px_26px_-10px_rgba(180,74,99,0.35)]"
+                  >
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#B44A63]/10 text-[#B44A63] transition-colors group-hover:bg-[#B44A63] group-hover:text-white">
+                      <Icon size={22} strokeWidth={1.6} />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block font-serif text-[17px] font-semibold leading-tight text-[#1E1C1A] group-hover:text-[#B44A63] transition-colors">
+                        {item.title}
+                      </span>
+                      <span className="mt-1 block text-[12.5px] leading-snug text-[#6E6762]">
+                        {item.text}
+                      </span>
+                    </span>
+                    <ChevronRight
+                      size={18}
+                      className="shrink-0 text-[#A59D96] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-[#B44A63]"
+                    />
+                  </a>
+                );
+              })}
             </div>
 
             {/* Statistics Row */}
-            <div className="flex flex-wrap sm:flex-nowrap items-start gap-5 sm:gap-7 w-full max-w-xl">
+            <div className="grid grid-cols-3 items-start w-full max-w-xl">
               {/* Stat 1 */}
-              <div className="flex flex-col">
-                <span className="font-serif text-[28px] sm:text-[32px] lg:text-[34px] font-normal text-[#1E1C1A] leading-none mb-1">
+              <div className="flex flex-col items-center text-center px-2 sm:px-4">
+                <span className="font-serif tabular-nums text-[26px] sm:text-[32px] lg:text-[34px] font-normal text-[#1E1C1A] leading-none mb-1.5">
                   {statsCount.women}+
                 </span>
-                <span className="text-[11.5px] leading-snug text-[#6E6762] font-normal">
+                <span className="text-[11px] sm:text-[11.5px] leading-snug text-[#6E6762] font-normal">
                   Women in our community
                 </span>
               </div>
 
-              <div className="hidden sm:block w-[1px] h-9 bg-[#E8E2DC] self-center shrink-0" />
-
               {/* Stat 2 */}
-              <div className="flex flex-col">
-                <span className="font-serif text-[28px] sm:text-[32px] lg:text-[34px] font-normal text-[#1E1C1A] leading-none mb-1">
+              <div className="flex flex-col items-center text-center px-2 sm:px-4 border-l border-[#E8E2DC]">
+                <span className="font-serif tabular-nums text-[26px] sm:text-[32px] lg:text-[34px] font-normal text-[#1E1C1A] leading-none mb-1.5">
                   {statsCount.percent}%
                 </span>
-                <span className="text-[11.5px] leading-snug text-[#6E6762] font-normal">
+                <span className="text-[11px] sm:text-[11.5px] leading-snug text-[#6E6762] font-normal">
                   Women return to work or grow in role
                 </span>
               </div>
 
-              <div className="hidden sm:block w-[1px] h-9 bg-[#E8E2DC] self-center shrink-0" />
-
               {/* Stat 3 */}
-              <div className="flex flex-col">
-                <span className="font-serif text-[28px] sm:text-[32px] lg:text-[34px] font-normal text-[#1E1C1A] leading-none mb-1">
+              <div className="flex flex-col items-center text-center px-2 sm:px-4 border-l border-[#E8E2DC]">
+                <span className="font-serif tabular-nums text-[26px] sm:text-[32px] lg:text-[34px] font-normal text-[#1E1C1A] leading-none mb-1.5">
                   {statsCount.programs}
                 </span>
-                <span className="text-[11.5px] leading-snug text-[#6E6762] font-normal">
+                <span className="text-[11px] sm:text-[11.5px] leading-snug text-[#6E6762] font-normal">
                   Flagship Programs
                 </span>
               </div>
@@ -119,16 +136,13 @@ export default function Hero({ onExplorePrograms }: HeroProps) {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
-            className="lg:col-span-6 xl:col-span-6 relative flex justify-center lg:justify-end items-center w-full py-6 lg:py-10"
+            className="lg:col-span-6 xl:col-span-6 relative flex justify-center lg:justify-end items-center w-full pt-2 pb-10 sm:pb-12 lg:pt-28 lg:pb-16"
           >
             <div className="relative w-full max-w-[460px] sm:max-w-[500px] lg:max-w-[520px] aspect-square rounded-2xl overflow-hidden shadow-[0_20px_50px_-15px_rgba(0,0,0,0.12)] border border-[#EFE8DF]/80 bg-[#FAF8F5]">
-              <Image
-                src={heroPortraitImg}
+              <img
+                src={typeof heroPortraitImg === "string" ? heroPortraitImg : heroPortraitImg.src}
                 alt="Ambitious woman reflecting with coffee and inspiring books"
-                fill
-                sizes="(max-width: 1024px) 100vw, 520px"
-                className="object-cover object-center"
-                priority
+                className="w-full h-full object-cover object-center"
               />
             </div>
           </motion.div>

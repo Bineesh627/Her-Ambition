@@ -4,6 +4,7 @@ import React from "react";
 import programBecomingImg from "../../public/images/program-becoming.webp";
 import programInfluenceImg from "../../public/images/program-influence.webp";
 import programFoundherImg from "../../public/images/program-foundher.webp";
+import { ArrowRight } from "lucide-react";
 import ProgramCard, { Program } from "./ProgramCard";
 
 const programsData: Program[] = [
@@ -77,18 +78,22 @@ export default function ProgramsSection({
   onViewAllPrograms,
 }: ProgramsSectionProps) {
   return (
-    <section id="programs" className="py-16 md:py-24 bg-white">
+    <section id="for-individuals" className="py-16 md:py-24 bg-white scroll-mt-20">
+      <div id="programs" className="sr-only" aria-hidden="true" />
       <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16">
           <div>
             <p className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] text-[#6E6762] uppercase mb-2">
-              OUR PROGRAMS
+              FOR INDIVIDUALS
             </p>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-[44px] font-normal text-[#1E1C1A] tracking-tight">
               Three Pathways. A Stronger You.
             </h2>
+            <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-[#5A5550]">
+              Practical programmes to help you restart, grow and lead in your career.
+            </p>
           </div>
 
           <div className="mt-4 md:mt-0">

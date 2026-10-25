@@ -42,7 +42,7 @@ interface TestimonialsProps {
 
 export default function Testimonials({ onSeeMoreStories }: TestimonialsProps) {
   return (
-    <section id="stories" className="py-20 md:py-28 bg-[#FAF8F5]/60">
+    <section id="stories" className="py-20 md:py-28 bg-[#FAF8F5]/60 scroll-mt-20">
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

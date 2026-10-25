@@ -1,11 +1,14 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import membershipMeetingImg from "../../public/images/membership-meeting.webp";
-import { Users } from "lucide-react";
+import { ArrowRight, Users } from "lucide-react";
 
-export default function MembershipSection() {
+interface MembershipSectionProps {
+  onJoinMembership?: () => void;
+}
+
+export default function MembershipSection({ onJoinMembership }: MembershipSectionProps) {
   return (
     <section id="community" className="py-14 sm:py-16 md:py-20 lg:py-24 bg-white overflow-hidden scroll-mt-20">
       <div id="membership" className="sr-only" aria-hidden="true" />
@@ -15,12 +18,11 @@ export default function MembershipSection() {
           {/* Left Column: Meeting Photography */}
           <div className="w-full lg:col-span-5 xl:col-span-5 flex justify-center">
             <div className="relative w-full max-w-[540px] lg:max-w-none aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden shadow-[0_10px_30px_-10px_rgba(0,0,0,0.08)] border border-[#ECE5DD] bg-[#FAF8F5]">
-              <Image
-                src={membershipMeetingImg}
+              <img
+                src={typeof membershipMeetingImg === "string" ? membershipMeetingImg : membershipMeetingImg.src}
                 alt="Diverse group of ambitious professional women networking and discussing in HerAmbition community"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-center"
+                className="w-full h-full object-cover object-center"
+                loading="lazy"
               />
             </div>
           </div>
