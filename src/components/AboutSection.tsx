@@ -67,7 +67,7 @@ export default function AboutSection({ onOpenFounderJourney }: AboutSectionProps
 
                 <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-[0_6px_25px_-6px_rgba(0,0,0,0.08)] bg-[#FDFBF9] border border-[#EFE8DF]/60">
                   <Image
-                    src="/images/founder-tabassum.webp"
+                    src="/images/founder-about.webp"
                     alt="Tabassum Sait — HR Practitioner, CIPD Certified, Mentor and Founder of HerAmbition"
                     width={768}
                     height={1024}

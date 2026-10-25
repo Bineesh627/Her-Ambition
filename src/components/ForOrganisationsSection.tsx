@@ -1,42 +1,172 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import orgImg from "../../public/images/membership-meeting.webp";
-import { CalendarCheck, Users, RefreshCw, TrendingUp, ArrowRight } from "lucide-react";
+import { CalendarCheck, Users, RefreshCw, TrendingUp, ArrowRight, X, CheckCircle2 } from "lucide-react";
 
 interface ForOrganisationsSectionProps {
   onEnquire?: () => void;
 }
 
+interface OfferingItem {
+  name: string;
+  text: string;
+}
+
 const offerings = [
   {
+    id: "maternity",
     title: "Maternity Transition Planning",
     description:
       "Help employees and managers plan for maternity leave, workload handovers and a smooth return.",
     icon: CalendarCheck,
+    items: [
+      {
+        name: "Maternity Coaching",
+        text: "Support women through maternity transitions with coaching and a confident return to work.",
+      },
+    ] as OfferingItem[],
   },
   {
+    id: "managers",
     title: "Manager Readiness Workshops",
     description:
       "Equip managers with practical tools, conversation guides and confidence to support their teams.",
     icon: Users,
+    items: [
+      {
+        name: "Line Manager Training",
+        text: "Equip line managers with practical tools, conversation guides and the confidence to support their teams.",
+      },
+    ] as OfferingItem[],
   },
   {
+    id: "return",
     title: "Return-to-Work Programme Design",
     description:
       "Create a structured return experience with role clarity, check-ins and a first 90 days plan.",
     icon: RefreshCw,
+    items: [
+      {
+        name: "Career Break & Returnship Programs",
+        text: "Create structured pathways for experienced professionals returning after a career break.",
+      },
+      {
+        name: "Return-to-Work & Inclusion Partnerships",
+        text: "Support returning women and build supportive, inclusive workplace environments.",
+      },
+    ] as OfferingItem[],
   },
   {
+    id: "continuity",
     title: "Women's Career Continuity & Development",
     description:
       "Help women remain engaged, rebuild momentum and progress into leadership roles.",
     icon: TrendingUp,
+    items: [
+      {
+        name: "Women's Career & Leadership Development",
+        text: "Build confidence, leadership capability and accelerate career growth.",
+      },
+      {
+        name: "Flexible & Remote Work Pathways",
+        text: "Enable sustainable careers through flexible, remote and life-stage-friendly models.",
+      },
+      {
+        name: "Women's Wellbeing at Work",
+        text: "Create conversations and support around wellbeing, burnout, menopause and mental health.",
+      },
+    ] as OfferingItem[],
   },
 ];
 
+type Offering = (typeof offerings)[number];
+
+function OfferingModal({
+  offering,
+  onClose,
+  onEnquire,
+}: {
+  offering: Offering | null;
+  onClose: () => void;
+  onEnquire?: () => void;
+}) {
+  useEffect(() => {
+    if (!offering) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [offering, onClose]);
+
+  if (!offering) return null;
+  const Icon = offering.icon;
+
+  return (
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center overflow-y-auto p-4 sm:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="offering-modal-title"
+    >
+      <div className="fixed inset-0 bg-black/55 backdrop-blur-xs" onClick={onClose} />
+      <div className="relative z-10 flex max-h-[90vh] w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-[#ECE5DD] bg-white shadow-2xl">
+        <div className="relative shrink-0 border-b border-[#ECE3D8] bg-[#FAF5EE] p-6 sm:p-7">
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="absolute right-4 top-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-white/90 text-[#1E1C1A] shadow-xs transition-all hover:bg-white hover:shadow-md"
+          >
+            <X size={18} />
+          </button>
+          <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-[#FCEEEA] text-[#B44A63]">
+            <Icon size={22} strokeWidth={1.6} />
+          </span>
+          <p className="mb-1 text-[10.5px] font-bold uppercase tracking-[0.2em] text-[#B44A63]">
+            Offerings for companies
+          </p>
+          <h3 id="offering-modal-title" className="pr-8 font-serif text-[22px] font-semibold leading-snug text-[#1E1C1A] sm:text-2xl">
+            {offering.title}
+          </h3>
+          <p className="mt-2 text-[13.5px] leading-relaxed text-[#5A5550]">{offering.description}</p>
+        </div>
+
+        <div className="overflow-y-auto p-6 sm:p-7">
+          <ul className="space-y-4">
+            {offering.items.map((item) => (
+              <li key={item.name} className="flex gap-3">
+                <CheckCircle2 size={20} className="mt-0.5 shrink-0 text-[#B44A63]" />
+                <div>
+                  <p className="text-[15px] font-semibold text-[#1E1C1A]">{item.name}</p>
+                  <p className="mt-0.5 text-[13.5px] leading-relaxed text-[#6E6762]">{item.text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <button
+            type="button"
+            onClick={() => {
+              onClose();
+              onEnquire?.();
+            }}
+            className="mt-7 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-[5px] bg-[#4A1F33] px-6 py-3.5 text-[13.5px] font-medium tracking-wide text-white transition-colors hover:bg-[#381827]"
+          >
+            Enquire in Contact <ArrowRight size={16} />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ForOrganisationsSection({ onEnquire }: ForOrganisationsSectionProps) {
   const imgSrc = typeof orgImg === "string" ? orgImg : orgImg.src;
+  const [selected, setSelected] = useState<Offering | null>(null);
 
   return (
     <section id="for-organisations" className="relative overflow-hidden bg-[#FAF8F5] border-t border-[#ECE5DC] py-14 sm:py-16 md:py-20 lg:py-24 scroll-mt-20">
@@ -115,7 +245,7 @@ export default function ForOrganisationsSection({ onEnquire }: ForOrganisationsS
                   <p className="mb-6 flex-1 text-[13.5px] leading-relaxed text-[#6E6762]">{o.description}</p>
                   <button
                     type="button"
-                    onClick={onEnquire}
+                    onClick={() => setSelected(o)}
                     className="inline-flex w-fit cursor-pointer items-center gap-1.5 rounded-[5px] bg-[#4A1F33] px-4 py-2 text-[12.5px] font-medium text-white transition-colors hover:bg-[#381827]"
                   >
                     Learn More <ArrowRight size={14} />
@@ -126,6 +256,8 @@ export default function ForOrganisationsSection({ onEnquire }: ForOrganisationsS
           </div>
         </div>
       </div>
+
+      <OfferingModal offering={selected} onClose={() => setSelected(null)} onEnquire={onEnquire} />
     </section>
   );
 }

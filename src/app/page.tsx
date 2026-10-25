@@ -16,13 +16,18 @@ import Footer from "@/components/Footer";
 import ProgramModal from "@/components/ProgramModal";
 import StoriesModal from "@/components/StoriesModal";
 import FounderModal from "@/components/FounderModal";
-import CorporatePartnerModal from "@/components/CorporatePartnerModal";
 
 export default function Home() {
   const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
   const [storiesModalOpen, setStoriesModalOpen] = useState(false);
   const [founderModalOpen, setFounderModalOpen] = useState(false);
-  const [corporateModalOpen, setCorporateModalOpen] = useState(false);
+
+  // No extra forms on the site: any "enquire / discuss" action takes people to the Contact section
+  const goToContact = () => {
+    setTimeout(() => {
+      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    }, 80);
+  };
 
   return (
     <main className="min-h-screen flex flex-col bg-white text-[#1E1C1A]">
@@ -45,7 +50,7 @@ export default function Home() {
       <CareerReadiness />
 
       {/* For Organisations */}
-      <ForOrganisationsSection onEnquire={() => setCorporateModalOpen(true)} />
+      <ForOrganisationsSection onEnquire={goToContact} />
 
       {/* Community: join us */}
       <MembershipSection />
@@ -81,12 +86,6 @@ export default function Home() {
       <FounderModal
         isOpen={founderModalOpen}
         onClose={() => setFounderModalOpen(false)}
-      />
-
-      {/* Corporate Partner Modal */}
-      <CorporatePartnerModal
-        isOpen={corporateModalOpen}
-        onClose={() => setCorporateModalOpen(false)}
       />
     </main>
   );

@@ -90,9 +90,9 @@ export default function RootLayout({
         url: "https://herambition.org",
         logo: {
           "@type": "ImageObject",
-          url: "https://herambition.org/logo.webp",
-          width: 1254,
-          height: 1254,
+          url: "https://herambition.org/logo-herambition.webp",
+          width: 913,
+          height: 591,
         },
         image: "https://herambition.org/images/hero-portrait.webp",
         description:

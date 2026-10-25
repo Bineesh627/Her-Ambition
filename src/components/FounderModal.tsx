@@ -57,7 +57,7 @@ export default function FounderModal({ isOpen, onClose }: FounderModalProps) {
             {/* Avatar */}
             <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden border-2 border-white shadow-md flex-shrink-0 bg-white">
               <Image
-                src="/images/founder-tabassum.webp"
+                src="/images/founder-about.webp"
                 alt="Tabassum Sait"
                 fill
                 sizes="112px"
