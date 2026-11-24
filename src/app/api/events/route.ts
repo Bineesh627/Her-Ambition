@@ -6,7 +6,7 @@
 //   CONTENTFUL_SPACE_ID        Contentful Space ID
 //   CONTENTFUL_ACCESS_TOKEN    Content Delivery API access token
 //   CONTENTFUL_ENVIRONMENT     optional, defaults to "master"
-//   CONTENTFUL_EVENT_TYPE      optional content type ID (default: tries "events", then "event")
+//   CONTENTFUL_EVENT_TYPE      optional content type ID (default: auto-detected)
 //
 // Content type fields: date (Date & time), title, category, description, registrationLink
 //
@@ -51,36 +51,52 @@ const istParts = (iso: string) => {
 const normaliseType = (t = ""): EventType =>
   TYPES.find((x) => x.toLowerCase() === t.trim().toLowerCase()) ?? "Community";
 
+// Never break the page: report "configured, but nothing available right now".
+// `status` is Contentful's HTTP status (401 = bad token, 404 = wrong Space ID / environment).
+const fail = (status: number, note?: string) =>
+  Response.json(
+    { configured: true, events: [], error: true, status, ...(note ? { note } : {}) },
+    { status: 200, headers: { "Cache-Control": "no-store" } }
+  );
+
 export async function GET() {
   const space = process.env.CONTENTFUL_SPACE_ID;
   const token = process.env.CONTENTFUL_ACCESS_TOKEN;
   const environment = process.env.CONTENTFUL_ENVIRONMENT || "master";
-  const contentTypes = process.env.CONTENTFUL_EVENT_TYPE
-    ? [process.env.CONTENTFUL_EVENT_TYPE]
-    : ["events", "event"];
-
   // Not set up yet: tell the page so it can keep showing its built-in events.
   if (!space || !token) {
     return Response.json({ configured: false, events: [] }, { headers: okHeaders });
   }
 
   try {
-    let items: ContentfulEntry[] = [];
-    for (const contentType of contentTypes) {
-      const url = new URL(`https://cdn.contentful.com/spaces/${space}/environments/${environment}/entries`);
-      url.searchParams.set("content_type", contentType);
-      url.searchParams.set("order", "fields.date");
-      url.searchParams.set("limit", "200");
+    const base = `https://cdn.contentful.com/spaces/${space}/environments/${environment}`;
+    const auth = { Authorization: `Bearer ${token}` };
 
-      const res = await fetch(url, {
-        headers: { Authorization: `Bearer ${token}` },
-        next: { revalidate: 300 },
-      });
-      if (res.status === 400 && contentTypes.length > 1) continue; // unknown content type ID, try next
-      if (!res.ok) throw new Error(`Contentful responded ${res.status}`);
-      items = ((await res.json()).items || []) as ContentfulEntry[];
-      break;
+    // Content type ID: use the env var if set, otherwise find the "Events" type automatically.
+    let contentType = process.env.CONTENTFUL_EVENT_TYPE;
+    if (!contentType) {
+      const ctRes = await fetch(`${base}/content_types?limit=100`, { headers: auth, next: { revalidate: 300 } });
+      if (!ctRes.ok) return fail(ctRes.status);
+      const cts = ((await ctRes.json()).items || []) as {
+        sys: { id: string };
+        name?: string;
+        fields?: { id: string }[];
+      }[];
+      const hasFields = (c: (typeof cts)[number]) =>
+        (c.fields || []).some((f) => f.id === "registrationLink") || (c.fields || []).some((f) => f.id === "date");
+      const match =
+        cts.find((c) => /event/i.test(c.sys.id) || /event/i.test(c.name || "")) || cts.find(hasFields);
+      if (!match) return fail(404, "no content type found");
+      contentType = match.sys.id;
     }
+
+    const url = new URL(`${base}/entries`);
+    url.searchParams.set("content_type", contentType);
+    url.searchParams.set("order", "fields.date");
+    url.searchParams.set("limit", "200");
+    const res = await fetch(url, { headers: auth, next: { revalidate: 300 } });
+    if (!res.ok) return fail(res.status);
+    const items = ((await res.json()).items || []) as ContentfulEntry[];
 
     const events = items
       .filter((e) => e.fields?.title && e.fields?.date)
@@ -103,10 +119,6 @@ export async function GET() {
 
     return Response.json({ configured: true, events }, { headers: okHeaders });
   } catch {
-    // Never break the page: report "configured, but nothing available right now"
-    return Response.json(
-      { configured: true, events: [], error: true },
-      { status: 200, headers: { "Cache-Control": "no-store" } }
-    );
+    return fail(500);
   }
 }
