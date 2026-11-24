@@ -20,18 +20,13 @@ export default function EventsSection() {
   const today = new Date();
   const todayIso = toKey(today.getFullYear(), today.getMonth(), today.getDate());
 
-  // Sessions pulled automatically from Cal.com (via /api/events)
+  // Sessions pulled automatically from Contentful (via /api/events)
   const [calEvents, setCalEvents] = useState<CalendarEvent[]>([]);
-  const [calConfigured, setCalConfigured] = useState(false);
   const userNavigated = useRef(false);
 
-  // Manual events; the placeholder samples disappear once Cal.com is connected
   const events = useMemo(
-    () =>
-      [...manualEvents.filter((e) => !(calConfigured && e.sample)), ...calEvents].sort((a, b) =>
-        a.date.localeCompare(b.date)
-      ),
-    [calConfigured, calEvents]
+    () => [...manualEvents, ...calEvents].sort((a, b) => a.date.localeCompare(b.date)),
+    [calEvents]
   );
 
   const monthOfNextEvent = (list: CalendarEvent[]) => {
@@ -50,7 +45,6 @@ export default function EventsSection() {
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         if (cancelled || !data) return;
-        setCalConfigured(!!data.configured);
         setCalEvents(Array.isArray(data.events) ? data.events : []);
       })
       .catch(() => {});
@@ -236,10 +230,12 @@ export default function EventsSection() {
                         <p className="mt-1.5 text-[13px] leading-relaxed text-[#5A5550]">{e.description}</p>
                         <a
                           href={e.link || "#contact"}
-                          {...(e.link ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                          {...(e.link && /^https?:\/\//i.test(e.link) && !e.link.includes("her-ambition-zeta.vercel.app")
+                            ? { target: "_blank", rel: "noopener noreferrer" }
+                            : {})}
                           className="mt-2 inline-flex items-center text-[12.5px] font-medium text-[#B44A63] hover:text-[#9E3D54]"
                         >
-                          {e.link ? "Register" : "Enquire to join"} &rarr;
+                          Enquire to join &rarr;
                         </a>
                       </div>
                     </li>

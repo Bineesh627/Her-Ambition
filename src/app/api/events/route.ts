@@ -1,66 +1,35 @@
 // ---------------------------------------------------------------------------
 // GET /api/events
-// Public, privacy-safe feed of upcoming sessions taken from Cal.com bookings.
+// Public feed of upcoming sessions, managed in Contentful.
 //
-// Setup (Vercel > Project > Settings > Environment Variables, then redeploy):
-//   CAL_API_KEY          Cal.com API key (starts with "cal_")  — stays on the server
-//   CAL_EVENT_TYPE_IDS   comma-separated Cal.com event-type IDs that should appear
-//                        on the website, e.g. "123456,123457"
-//                        (use ONLY public workshops/webinars/meetups — never 1:1 calls)
-//   CAL_USERNAME         optional, defaults to the site's Cal.com username
-//   CAL_API_VERSION      optional, defaults to 2026-05-01
+// Setup: put these in .env.local (local) and in Vercel > Settings > Environment Variables:
+//   CONTENTFUL_SPACE_ID        Contentful Space ID
+//   CONTENTFUL_ACCESS_TOKEN    Content Delivery API access token
+//   CONTENTFUL_ENVIRONMENT     optional, defaults to "master"
+//   CONTENTFUL_EVENT_TYPE      optional content type ID (default: tries "events", then "event")
 //
-// Privacy: only title, date, time and a booking link leave this file.
-// Attendee names / emails / meeting links are never sent to the browser.
+// Content type fields: date (Date & time), title, category, description, registrationLink
+//
+// Only published entries are returned (Content Delivery API). The token stays
+// on the server and is never sent to the browser.
 // ---------------------------------------------------------------------------
 
-const CAL_BASE = process.env.CAL_API_BASE || "https://api.cal.com";
-const CAL_VERSION = process.env.CAL_API_VERSION || "2026-05-01";
-const DEFAULT_USERNAME = "her-ambition-lzbpgs";
-
-interface CalAttendee {
-  name?: string;
-}
-interface CalBooking {
-  uid: string;
-  title?: string;
-  status?: string;
-  start: string;
-  duration?: number;
-  eventType?: { id: number; slug?: string };
-  attendees?: CalAttendee[];
-}
-
 type EventType = "Community" | "Workshop" | "Webinar" | "Programme";
+const TYPES: EventType[] = ["Community", "Workshop", "Webinar", "Programme"];
 
-const headers = {
-  "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
-};
+interface ContentfulEntry {
+  sys: { id: string };
+  fields: {
+    title?: string;
+    date?: string;
+    category?: string;
+    description?: string;
+    registrationLink?: string;
+    time?: string;
+  };
+}
 
-const prettifySlug = (slug = "") =>
-  slug
-    .split("-")
-    .filter(Boolean)
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
-
-const guessType = (text: string): EventType => {
-  const t = text.toLowerCase();
-  if (t.includes("webinar")) return "Webinar";
-  if (t.includes("workshop") || t.includes("clinic") || t.includes("training")) return "Workshop";
-  if (t.includes("programme") || t.includes("program") || t.includes("info session") || t.includes("cohort"))
-    return "Programme";
-  return "Community";
-};
-
-// Title that is safe to show publicly: drops Cal's default " between X and Y"
-// suffix, and falls back to the event-type slug if an attendee name slipped in.
-const safeTitle = (b: CalBooking) => {
-  const cleaned = (b.title || "").replace(/\s+between\s+.*$/i, "").trim();
-  const names = (b.attendees || []).map((a) => (a.name || "").trim().toLowerCase()).filter((n) => n.length > 1);
-  const leaks = names.some((n) => cleaned.toLowerCase().includes(n)) || cleaned.includes("@");
-  return !cleaned || leaks ? prettifySlug(b.eventType?.slug) || "HerAmbition Session" : cleaned;
-};
+const okHeaders = { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" };
 
 const istParts = (iso: string) => {
   const d = new Date(iso);
@@ -79,72 +48,65 @@ const istParts = (iso: string) => {
   return { date, time: `${time} IST` };
 };
 
-export async function GET() {
-  const key = process.env.CAL_API_KEY;
-  const allowed = (process.env.CAL_EVENT_TYPE_IDS || "")
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
-  const username = process.env.CAL_USERNAME || DEFAULT_USERNAME;
+const normaliseType = (t = ""): EventType =>
+  TYPES.find((x) => x.toLowerCase() === t.trim().toLowerCase()) ?? "Community";
 
-  // Not set up yet: tell the page so it can keep showing its manual events.
-  if (!key || allowed.length === 0) {
-    return Response.json({ configured: false, events: [] }, { headers });
+export async function GET() {
+  const space = process.env.CONTENTFUL_SPACE_ID;
+  const token = process.env.CONTENTFUL_ACCESS_TOKEN;
+  const environment = process.env.CONTENTFUL_ENVIRONMENT || "master";
+  const contentTypes = process.env.CONTENTFUL_EVENT_TYPE
+    ? [process.env.CONTENTFUL_EVENT_TYPE]
+    : ["events", "event"];
+
+  // Not set up yet: tell the page so it can keep showing its built-in events.
+  if (!space || !token) {
+    return Response.json({ configured: false, events: [] }, { headers: okHeaders });
   }
 
   try {
-    const bookings: CalBooking[] = [];
-    let cursor: string | null = null;
-
-    for (let page = 0; page < 3; page++) {
-      const url = new URL("/v2/bookings", CAL_BASE);
-      url.searchParams.set("status", "upcoming");
-      url.searchParams.set("eventTypeIds", allowed.join(","));
-      url.searchParams.set("afterStart", new Date().toISOString());
-      url.searchParams.set("sortStart", "asc");
-      url.searchParams.set("limit", "100");
-      if (cursor) url.searchParams.set("cursor", cursor);
+    let items: ContentfulEntry[] = [];
+    for (const contentType of contentTypes) {
+      const url = new URL(`https://cdn.contentful.com/spaces/${space}/environments/${environment}/entries`);
+      url.searchParams.set("content_type", contentType);
+      url.searchParams.set("order", "fields.date");
+      url.searchParams.set("limit", "200");
 
       const res = await fetch(url, {
-        headers: { Authorization: `Bearer ${key}`, "cal-api-version": CAL_VERSION },
-        cache: "no-store",
+        headers: { Authorization: `Bearer ${token}` },
+        next: { revalidate: 300 },
       });
-      if (!res.ok) throw new Error(`Cal.com responded ${res.status}`);
-
-      const json = await res.json();
-      bookings.push(...((json.data || []) as CalBooking[]));
-      cursor = json.pagination?.hasMore ? json.pagination.nextCursor : null;
-      if (!cursor) break;
+      if (res.status === 400 && contentTypes.length > 1) continue; // unknown content type ID, try next
+      if (!res.ok) throw new Error(`Contentful responded ${res.status}`);
+      items = ((await res.json()).items || []) as ContentfulEntry[];
+      break;
     }
 
-    const seen = new Set<string>();
-    const events = bookings
-      .filter((b) => b.status === "accepted" && b.eventType && allowed.includes(String(b.eventType.id)))
-      .filter((b) => {
-        // One entry per session (a seated session can have many bookings)
-        const k = `${b.eventType!.id}-${b.start}`;
-        if (seen.has(k)) return false;
-        seen.add(k);
-        return true;
-      })
-      .map((b) => {
-        const title = safeTitle(b);
-        const { date, time } = istParts(b.start);
+    const events = items
+      .filter((e) => e.fields?.title && e.fields?.date)
+      .map((e) => {
+        const f = e.fields;
+        // A date-only value (YYYY-MM-DD) has no time zone shift; a full timestamp is shown in IST.
+        const dateOnly = /^\d{4}-\d{2}-\d{2}$/.test(f.date!);
+        const parts = dateOnly ? { date: f.date!, time: "" } : istParts(f.date!);
         return {
-          id: b.uid,
-          title,
-          date,
-          time,
-          type: guessType(`${title} ${b.eventType?.slug || ""}`),
-          description: `${b.duration ? `${b.duration}-minute live` : "Live"} session. Register to reserve your seat.`,
-          link: b.eventType?.slug ? `https://cal.com/${username}/${b.eventType.slug}?date=${date}` : undefined,
+          id: e.sys.id,
+          title: f.title!.trim(),
+          date: parts.date,
+          time: (f.time || "").trim() || parts.time,
+          type: normaliseType(f.category),
+          description: (f.description || "").trim(),
+          link: f.registrationLink?.trim() || undefined,
         };
       })
-      .sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
+      .sort((a, b) => a.date.localeCompare(b.date));
 
-    return Response.json({ configured: true, events }, { headers });
+    return Response.json({ configured: true, events }, { headers: okHeaders });
   } catch {
     // Never break the page: report "configured, but nothing available right now"
-    return Response.json({ configured: true, events: [], error: true }, { status: 200, headers: { "Cache-Control": "no-store" } });
+    return Response.json(
+      { configured: true, events: [], error: true },
+      { status: 200, headers: { "Cache-Control": "no-store" } }
+    );
   }
 }
